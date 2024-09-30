@@ -1,0 +1,95 @@
+CS256 Project Proposal – Online Shopping Database
+Amir Samadian
+
+Domain
+
+My project will create a database for a fashion & apparel E-Commerce website such as sidemenclothing.com.  The database will manage information about each clothing item (size, price, colors, etc..) and what category they belong to. They can be categorized based off what they are (hoodies, socks, shirts, etc…) or by the collection/style that they belong to (SDMN x SpongeBob, SDMN FC, Varsity , SDMN x Hot Wheels, etc...). The database also manages information about the users / customers such as their address, payment details, account info, etc… There will also be information about what discounts are available, and what items are in the cart. 
+
+Motivation
+
+The primary users of this database will be the administrators and employees responsible for managing the e-commerce platform, as they need to track and update product inventory, customer details, and orders in real-time. Accurate and up-to-date product information is crucial for any e-commerce business, as customers rely on it to make purchasing decisions. This database will allow efficient management of product details such as size, price, availability, and styles, all categorized by product types or collections, ensuring customers have a seamless shopping experience.
+
+Moreover, customers will have access to their personal accounts, allowing them to manage their profile information, addresses, payment methods, and track orders. The integration of discount codes and available offers will enhance the customer experience, encouraging repeat purchases and fostering brand loyalty. By storing and organizing critical data such as cart contents and payment details, the database will also help streamline the checkout process, making it faster and more secure.
+
+Employees tasked with customer service and fulfillment will use a customized application connected to the database, enabling them to handle customer inquiries, manage stock, and process refunds or returns without requiring deep technical knowledge. The system will also track sales trends, inventory status, and product popularity, helping the company make informed business decisions and plan for future stock orders.
+
+Compared to older methods of manually tracking inventory and orders, this database-driven system will significantly improve efficiency, reduce errors, and ensure customer satisfaction by providing fast, reliable access to accurate data. It will also enhance scalability, making it easier to maintain as the business grows.
+
+
+
+Data Needs:
+
+What is the name of the product?
+
+What is the price of the product?
+
+What is a description of the product?
+
+How many of <product> are in stock?
+
+In-stock status of product
+
+What is the color of the product?
+
+Is the product for men or women?
+
+How many of a certain product have sold?
+
+What time and date did the product come out?
+
+Picture of the product
+--------------------------------------------------------
+What categories can a product go into? 
+
+What products are in each category?
+
+What collections are there?
+
+What products are in each collection?
+----------------------------------------------------
+
+What people have accounts for the website? / What are the users of the website?
+
+What is the user’s login and password?
+
+What is the user’s associated gmail accunt?
+
+What are the payment details for each user?
+
+What payment method are they using? (Credit, Paypal)
+
+What is the card number? Expiration date? Security Code? Billing zip code?
+
+What is the PayPal account number?
+
+What is each person’s address?
+--------------------------------------------
+
+What items are in the cart?
+
+When was an item ordered?
+
+When will the item get to the user?
+------------------------------------------------
+What discounts are available?
+
+What is the discount code?
+
+How much is the discount?
+
+From when to when is the discount available?
+
+
+
+
+
+
+Questions for Dr. Sliva:
+
+Is it ok to use the same products and collections as the sidemenclothing website? 
+
+I want to make an ecommerce website for clothing but I don’t really care if it’s sidemenclothing or anything else. I just thought that would be a good, simple model to go off of. This way I also have pictures, names, prices, etc… already available which allows me to focus more on the implementation and database design rather than coming up with random clothing items.
+
+Please let me know if there are some important data needs that I forgot about. 
+
+Thank you.
