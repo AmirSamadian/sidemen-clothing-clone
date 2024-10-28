@@ -1,6 +1,6 @@
 CS256 Project Proposal – Online Shopping Database
 Amir Samadian
-
+ 
 Domain
 
 My project will create a database for a fashion & apparel E-Commerce website such as sidemenclothing.com.  The database will manage information about each clothing item (size, price, colors, etc..) and what category they belong to. They can be categorized based off what they are (hoodies, socks, shirts, etc…) or by the collection/style that they belong to (SDMN x SpongeBob, SDMN FC, Varsity , SDMN x Hot Wheels, etc...). The database also manages information about the users / customers such as their address, payment details, account info, etc… There will also be information about what discounts are available, and what items are in the cart. 
@@ -93,3 +93,5 @@ I want to make an ecommerce website for clothing but I don’t really care if it
 Please let me know if there are some important data needs that I forgot about. 
 
 Thank you.
+
+
