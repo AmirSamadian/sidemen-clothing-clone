@@ -20,6 +20,8 @@ Category
 Discount
     Product Discount, Collection Discount, Account discount (applied to cart)
 
+        eligibility criteria
+
 Account
 
 Cart
@@ -38,8 +40,6 @@ Orders
 - I'm confused on orders and cart because these are things that come into play based on the user's interaction with the website. 
 
 
-Question about account... I want it to be possible to browse the website, add items to cart, and make orders without having to make an account right off the bat. How would I go about this?
-
 Reviews (add this to proposal also)
 
 
@@ -56,15 +56,66 @@ Product added to Cart
 
 Concern 1: I feel like I'm missing a bunch of stuff that goes into an ecommerce website
 
-Concern 2: Cart is confusing
 
-Concern 3: Discount is confusing because there's so many different ways they can be applied.
+
+
 
 
 Entity Sets:
 
+Account - This entity set stores the information for any user of the clothing website. Log-in details, payment details, address, etc...
+
+Product - This entity set describes a general product being sold (items with the same name/type of thing we're selling) such as the "Y2K Orbit Hoodie". It doesn't describe a specific item (the single product that gets shipped out). This database doesn't keep track of specific items because they get shipped out and are then gone. 
+
+Category - This entity set describes the types of products that the store has. Entities would look like... hoodie, socks, t-shirt, slides, necklace, etc. 
+
+Cart - This entity set describes an online shopping cart. Items that the user is interested in go into the cart and then when the user desides to make a purchase, they purchase a cart. If they're purchasing 1 item, that's still purchasing a cart but the size of the cart is 1 item.
+
+Discounts - This entity set describes the different types of discounts the store may offer. 
+    Specializations:
+        Product Discount - Discount applied on a product. The discount may be on 1 product, on products of the same category, or on products of same collection. 
+
+        Cart Discount - Discount applied on a whole cart. May need some eligibility criteria such as minimum part price. 
 
 
 Relationship Sets:
 
+Account creates cart??????
+
+[P] Account [1] Orders [M] Cart [P]
+
+Participation explanation: An account doesn't need to order a cart and a cart doesn't need to get ordered. It could just be a cart that got forgetten about. So both are partial. 
+
+Cardinality explanation: A cart cannot be ordered by multiple accounts. Even if the cart has the same exact items, no 2 carts are the same. So account is 1. An account can order many carts over time so cart is many.
+
+[P] Cart contains Product [P]
+
+Participation explanation: A cart doesn't need to have a product in it
+Cardinality explanation: 
+
+Product belongs to Category
+
+Participation explanation: 
+Cardinality explanation: 
+
+Product added to Cart 
+
+Participation explanation: 
+Cardinality explanation: 
+
+
+Discount applied on Product
+Discount applied on Cart
+
+
 Attributes:
+
+
+
+
+
+Remaining Questions and Conerns:
+
+1. I want it to be possible to browse the website, add items to cart, and make orders without having to make an account right off the bat. How would I go about this?
+
+2. How does an entity set like cart work? It's so dependant on how the user interacts with the website. 
