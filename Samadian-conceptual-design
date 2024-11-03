@@ -1,0 +1,70 @@
+Entity Set Candidates: 
+
+Product (This is like literary work in the library. It's the general product being sold)
+
+Item (kind of like book in the library. This is the specific item being bought) 
+    XXXX I don't think this will be necessary since we don't really care about a specific item. We just care about the overall data regarding the product. Unlike the library, we're not getting these items back, so there's not really a point in storing them in the database. It's best to just have an attribute in product keeping track of how many in stock. What about handling returns? Orders relationship could do this
+    Maybe a database for the warehouse managing this business would require that info. Idk.
+
+Collection  
+    XXXX Probably best to just have this be an attribute of product since not much goes into a collection. You can still do the organizing of the website with collection as an attribute.
+
+Category
+
+    Three ways I could go about subcategories of products:
+        1. I could have an entity set called product and an entity set called category   which says if it's a hoodie, sock, shoe, hat, necklace etc...
+        This could be necessary because sizing is different for different categories of items
+        2. The category could just be an attribute of the product called product_type. 
+        3. Having the categories be specializations of product. I don't think this one is good because there will just be so many of them. 
+
+Discount
+    Product Discount, Collection Discount, Account discount (applied to cart)
+
+Account
+
+Cart
+    Probably starts out with a bunch of empty data and stuff gets added on??
+    Is most of the stuff in here derived?
+    Probably reference account it belongs to.
+    Needs to store the items in the cart. 
+
+        Alternative approach would be having a relationship set such as 
+        Account Considers Product and the table created from that would be the stuff in the cart.
+
+Orders
+    XXXX This is more of a relationship. Account Orders Product. Or even, Account Orders Cart if we consider an order to be the whole cart. 
+
+
+- I'm confused on orders and cart because these are things that come into play based on the user's interaction with the website. 
+
+
+Question about account... I want it to be possible to browse the website, add items to cart, and make orders without having to make an account right off the bat. How would I go about this?
+
+Reviews (add this to proposal also)
+
+
+Product, Account, Discounts, Category, Cart
+
+
+Account Orders Cart
+Cart contains Product
+Discount applied on Product
+Discount applied on Cart
+Product belongs to Category
+Product added to Cart 
+
+
+Concern 1: I feel like I'm missing a bunch of stuff that goes into an ecommerce website
+
+Concern 2: Cart is confusing
+
+Concern 3: Discount is confusing because there's so many different ways they can be applied.
+
+
+Entity Sets:
+
+
+
+Relationship Sets:
+
+Attributes:
