@@ -67,7 +67,7 @@ Product - This entity set describes a general product being sold (items with the
 
 Category - This entity set describes the types of products that the store has. Entities would look like... hoodie, socks, t-shirt, slides, necklace, etc. 
 
-Cart - This entity set describes an online shopping cart. Items that the user is interested in go into the cart and then when the user desides to make a purchase, they purchase a cart. If they're purchasing 1 item, that's still purchasing a cart but the size of the cart is 1 item.
+Cart - This entity set describes an online shopping cart. Items that the user is interested in go into the cart and then when the user desides to make a purchase, they purchase a cart. If they're purchasing 1 item, that's still purchasing a cart but the size of the cart is 1 item. Every user owns an account 
 
 Discounts - This entity set describes the different types of discounts the store may offer. They could be applied on an entire cart when making an order or they could be applied to a product or products that share an attribute.
 
@@ -139,11 +139,11 @@ Cardinality explanation: A discount can be applied on many people's carts so car
 Attributes:
 
     Account
-        - username (primary key)
+        - account_id (primary key)
+        - email
         - password
         - name {first_name, last_name}
         - phone_number
-        - email
         - date_created
         - address {country, state, city, street, zip_code, level}
 
@@ -206,6 +206,10 @@ Relationship Attributes:
 Remaining Questions and Conerns:
 
 1. I want it to be possible to browse the website, add items to cart, and make orders without having to make an account right off the bat. How would I go about this?
+
+Any user will have to end up giving the information needed for an account when they checkout. But it's not needed to make an account upon clicking the website link and there is already a cart for you. I think as long as cart is configured so that it exists without needing to create an account, I'll be good. 
+
+I had the idea of making specialization : User parent of account, and guest. But guests also need to put in all that information anyway when they check out.
 
 2. How does an entity set like cart work? It's so dependant on how the user interacts with the website. 
 
