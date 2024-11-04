@@ -54,8 +54,6 @@ Product belongs to Category
 Product added to Cart 
 
 
-Concern 1: I feel like I'm missing a bunch of stuff that goes into an ecommerce website
-
 
 
 
@@ -71,16 +69,20 @@ Category - This entity set describes the types of products that the store has. E
 
 Cart - This entity set describes an online shopping cart. Items that the user is interested in go into the cart and then when the user desides to make a purchase, they purchase a cart. If they're purchasing 1 item, that's still purchasing a cart but the size of the cart is 1 item.
 
-Discounts - This entity set describes the different types of discounts the store may offer. 
-    Specializations:
-        Product Discount - Discount applied on a product. The discount may be on 1 product, on products of the same category, or on products of same collection. 
-
-        Cart Discount - Discount applied on a whole cart. May need some eligibility criteria such as minimum part price. 
+Discounts - This entity set describes the different types of discounts the store may offer. They could be applied on an entire cart when making an order or they could be applied to a product or products that share an attribute.
 
 
 Relationship Sets:
 
-Account creates cart??????
+Account creates cart?  XXXXX
+
+[T] Account [1] Owns [1] Cart [T]
+
+Participation explanation: Every account, as soon as created, owns a cart. So account is total. If a cart exists, it belongs to an account. So cart is total
+
+Cardinality explanation: An account only owns 1 cart and can't have more than 1 cart associated with it so cart is 1. A cart only belongs to 1 account so account is 1.
+
+-----------------------------------------------------------------
 
 [P] Account [1] Orders [M] Cart [P]
 
@@ -88,30 +90,117 @@ Participation explanation: An account doesn't need to order a cart and a cart do
 
 Cardinality explanation: A cart cannot be ordered by multiple accounts. Even if the cart has the same exact items, no 2 carts are the same. So account is 1. An account can order many carts over time so cart is many.
 
-[P] Cart contains Product [P]
+-----------------------------------------------------------------
 
-Participation explanation: A cart doesn't need to have a product in it
+[P] Cart [M] contains [M] Product [P]
+
+Participation explanation: A cart doesn't need to have a product in it so it's partial. And a  product doesn't have to be in a cart so it's partial.
+
+Cardinality explanation: A cart can have many products in it so product is many. A product could be in many different people's carts so cart is many.
+
+-----------------------------------------------------------------
+
+[T] Product [M] belongs to [1] Category [P]
+
+Participation explanation: If a product exists in the store, it belongs to some category, so product is total. There is a case where a category has been made (shoe) but they haven't released any specific shoes yet. So it's best to have category be partial.
+
+Cardinality explanation: A category can have many products in it so product is many. A product can't be a hoodie and a sock at the same time. Each product belongs to only 1 category so category is 1. 
+
+-----------------------------------------------------------------
+
+Product added to Cart????
+Product removed from Cart????
+
+I think "cart contains product" gets rid of both of these. Can just code remove and add to delete the product from that table.
+
+-----------------------------------------------------------------
+
+[P] Account [M] Reviews [M] Product [P]
+
+Participation explanation: An account doesn't have to review a product and a product doesn't have to  have a review so both partial
+
+Cardinality explanation: Many accounts can review a product so product is many. Many An account can review many products so account is many. 
+
+-----------------------------------------------------------------
+
+[P] Discount applied on Product
+
+Participation explanation: Not all discounts are applied on a product. 
+
 Cardinality explanation: 
 
-Product belongs to Category
+[P] Discount [1] applied on [M] Cart [P]
 
-Participation explanation: 
-Cardinality explanation: 
+Participation explanation: Not all discounts are applied on a cart. There are discounts that have not been applied yet. Not all carts have discounts applied to them. So both partial
 
-Product added to Cart 
-
-Participation explanation: 
-Cardinality explanation: 
-
-
-Discount applied on Product
-Discount applied on Cart
+Cardinality explanation: A discount can be applied on many people's carts so cart is many. I don't wan't to allow the possibility of more than 1 discount being applied to a cart so discount will be 1. A cart can only take 1 cart discount. 
 
 
 Attributes:
 
+    Account
+        - username (primary key)
+        - password
+        - name {first_name, last_name}
+        - phone_number
+        - email
+        - date_created
+        - address {country, state, city, street, zip_code, level}
 
+    Cart
+        - cart_id (primary key)
+        - total_price 
+        - num_of_items 
 
+    Note: both total_price and num_of_items could be considered derived as they depend on when items are added or removed from the cart, but I think it's best to store them and update them than to not have them in the database. This is also useful for making simple comparisons for discount eligibility_criteria.
+
+    Prodcut
+        - product_id (primary key)
+        - product_name
+        - collection_name
+        - price
+        - size
+        - color 
+        - intended_gender
+        - description
+        - images [Multi-valued]
+        - num_in_stock
+        - release_time --> date and time
+        - termination_time --> date and time
+
+            ??Do I have to make an entity for each color-size combination!? how do I handle this??
+
+    Category
+        - category_id (primary key)
+        - category_name
+        - size_type --- different for jewelry, shirts, shoes
+
+    Discount
+        - discount_id (primary key)
+        - discount_name
+        - discount_code
+        - percent_off
+        - dollars_off  --> null if a percentage discount
+        - eligibility_criteria
+        - release_time
+        - duration
+
+Relationship Attributes: 
+
+    Account Orders Cart
+        - payment_details {card_num, exp_date, security_code, name}
+        - order_status  --- is it pending or complete
+        - order_timestamp
+        - shipment_price
+        - shipment_type
+        - expected_delivery 
+
+    Account Reviews Product
+        - review_id
+        - rating --> must be 1-5 stars
+        - review_description --> user types this in and if they hit enter it gets stored into database. Otherwise null
+
+    * I  don't wan't to account for paypal anymore. So much goes into handling that website redirection safely. 
 
 
 Remaining Questions and Conerns:
@@ -119,3 +208,13 @@ Remaining Questions and Conerns:
 1. I want it to be possible to browse the website, add items to cart, and make orders without having to make an account right off the bat. How would I go about this?
 
 2. How does an entity set like cart work? It's so dependant on how the user interacts with the website. 
+
+3. Save a payment method to an account so they don't have to enter every time.
+
+
+removed:
+
+    Specializations:
+        Product Discount - Discount applied on a product. The discount may be on 1 product, on products of the same category, or on products of same collection. 
+
+        Cart Discount - Discount applied on a whole cart. May need some eligibility criteria such as minimum part price. 
