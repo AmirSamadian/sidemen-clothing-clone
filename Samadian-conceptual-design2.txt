@@ -1,0 +1,148 @@
+
+
+Entity Sets:
+
+Account - This entity set stores the information for any user of the clothing website. Log-in details, payment details, address, etc...
+
+Product - This entity set describes a general product being sold (type of thing we're selling) such as the "Y2K Orbit Hoodie". 
+It doesn't describe a specific item (the single product that gets shipped out). This database doesn't keep track of specific items because they get shipped 
+out and are then gone. Each color-size combination is a different entity of this entity set.
+
+Category - This entity set describes the types of products that the store has. Entities would look like... hoodie, socks, t-shirt, slides, necklace, etc. 
+
+Cart - This entity set describes a cart. Carts come in 2 forms based on their status, they can be open (not ordered yet) or completed (ordered). 
+It has an account_id attribute to show that accounts own carts. When a user logs in, the website checks the database for an open cart tied to their account. 
+If one exists, it loads the items from that cart; if not, it creates a new empty cart in the database and links it to the account. If a user closes the site and logs back in,
+they can still see what was in their cart. This feature is not available for guest users because there is no account for them in the database. When an account orders a cart, 
+that cart and all it's info gets stored in the database keeping track of the order that was made. Then, a new, open cart is created for them. In a way, each cart represents a potential order or an actual order.
+
+Discounts - This entity set describes the different types of discounts the store may offer. They could be applied on an entire order/cart  
+or they could be applied to a product or products that share an attribute.
+
+----------------------------------------------------------------------------------------
+
+Relationship Sets:
+
+[P] Account [1] orders [M] Cart [P]
+
+Participation explanation: An account doesn't need to order a cart so account is partial. Not every cart is completed. cart's with open status are not participating so cart is partial.
+
+Cardinality explanation: The same cart cannot be ordered by multiple accounts. Even if the cart has the same exact items, no 2 carts are the same. So account is 1. An account can order many carts over time so cart is many.
+
+----------------------------------------------------------------------------------------
+
+[P] Cart [M] contains [M] Product [P]
+
+Participation explanation: A cart doesn't need to have a product in it so it's partial. And a  product doesn't have to be in a cart so it's partial.
+
+Cardinality explanation: A cart can have many products in it so product is many. A product could be in many different people's carts so cart is many.
+
+----------------------------------------------------------------------------------------
+
+[T] Product [M] belongs to [1] Category [P]
+
+Participation explanation: If a product exists in the store, it belongs to some category, so product is total. There is a case where a category has been made (shoe) but they haven't released any specific shoes yet. So it's best to have category be partial.
+
+Cardinality explanation: A category can have many products in it so product is many. A product can't be a hoodie and a sock at the same time. Each product belongs to only 1 category so category is 1. 
+
+----------------------------------------------------------------------------------------
+
+[P] Account [M] reviews [M] Product [P]
+
+Participation explanation: An account doesn't have to review a product and a product doesn't have to have a review so both partial
+
+Cardinality explanation: Many accounts can review a product so product is many. An account can review many products so account is many. 
+
+----------------------------------------------------------------------------------------
+
+[P] Discount [1] applied on [M] Cart [P]
+
+Participation explanation: Not all discounts are applied on a cart. There are discounts that have not been applied yet. Not all carts have discounts applied to them. So both partial
+
+Cardinality explanation: A discount can be applied on many people's carts so cart is many. I don't wan't to allow the possibility of more than 1 discount being applied to a cart so discount will be 1. A cart can only take 1 cart discount. 
+
+----------------------------------------------------------------------------------------
+
+[P] Discount [1] applied on [M] Product [P]
+
+Participation explanation: Not all discounts are applied on a product so discount is partial. Not al products have a discount so product is partial.
+
+Cardinality explanation: A discount can be applied on many products so product is many. I don't wanna allow the possibility of multiple discounts account on 1 product so discount is 1.
+
+----------------------------------------------------------------------------------------
+
+
+
+Attributes:
+
+    Account
+        - account_id (primary key)
+        - email
+        - password
+        - name {first_name, last_name}
+        - phone_number
+        - date_created
+        - address {country, state, city, street, zip_code, level}
+
+    Cart
+        - cart_id (primary key)
+        - account_id (indicates ownership of the cart. Which account owns this cart?)
+        - status (e.g., “open” for ongoing cart, “completed” for orders placed)
+        - total_price 
+        - cart_timestamp
+        - num_of_items 
+        - shipment_price
+        - shipment_company   (how is it getting to the customer)
+        - expected_delivery 
+
+    Note: both total_price and num_of_items could be considered derived as they depend on when items 
+    are added or removed from the cart, but I think it's best to store them and update them than to not 
+    have them in the database. This is also useful for making simple comparisons for discount eligibility_criteria.
+
+    Prodcut
+        - product_id (primary key)
+        - product_name
+        - collection_name
+        - price
+        - size 
+        - color 
+        - intended_gender
+        - description
+        - images [Multi-valued]
+        - num_in_stock
+        - release_time --> date and time
+        - termination_time --> date and time
+
+    Category
+        - category_id (primary key)
+        - category_name
+
+    Discount
+        - discount_id (primary key)
+        - discount_name
+        - discount_code
+        - percent_off
+        - dollars_off  --> null if a percentage discount
+        - eligibility_criteria      (ex. order must be abovd $20 to get discount)
+        - release_time
+        - duration
+        end time is derived no need to store it
+
+Relationship Attributes: 
+
+    Account orders Cart
+        - payment_details {card_num, exp_date, security_code, name}
+
+    Account Reviews Product
+        - review_id
+        - rating --> must be 1-5 stars
+        - review_description --> user types this in and if they hit enter it gets stored into database. Otherwise null
+
+    * I  don't wan't to account for paypal anymore. So much goes into handling that website redirection safely. 
+
+    Cart contains Product
+        - quantity
+
+
+
+
