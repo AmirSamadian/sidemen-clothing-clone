@@ -52,7 +52,7 @@ What people have accounts for the website? / What are the users of the website?
 
 What is the user’s login and password?
 
-What is the user’s associated gmail accunt?
+What is the user’s associated gmail account?
 
 What are the payment details for each user?
 
