@@ -1,5 +1,4 @@
 
-
 Entity Sets:
 
 Account - This entity set stores the information for any user of the clothing website. Log-in details, payment details, address, etc...
