@@ -121,8 +121,8 @@ Attributes:
         - discount_id (primary key)
         - discount_name
         - discount_code
-        - percent_off
-        - dollars_off  --> null if a percentage discount
+        - discount_type (specifies if percent off or dollar off)
+        - discount_value
         - eligibility_criteria      (ex. order must be abovd $20 to get discount)
         - release_time
         - duration
