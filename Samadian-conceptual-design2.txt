@@ -65,19 +65,19 @@ Cardinality explanation: A discount can be applied on many people's carts so car
 
 ----------------------------------------------------------------------------------------
 
-[P] Discount [1] applied on [M] Product [P]
+[P] Discount [M] applied on [M] Product [P]
 
 Participation explanation: Not all discounts are applied on a product so discount is partial. Not al products have a discount so product is partial.
 
-Cardinality explanation: A discount can be applied on many products so product is many. I don't wanna allow the possibility of multiple discounts account on 1 product so discount is 1.
+Cardinality explanation: A discount can be applied on many products so product is many. A product can have many discounts applied on it because different users can apply a discount to the same product (even if they're the same type of discount, since many users are applying the same discount, it's many discount entities on the same product).
 
 ----------------------------------------------------------------------------------------
 
-[T] Account [M] uses [M] PaymentMethod [T]
+[T] Account [1] uses [M] PaymentMethod [T]
 
 Participation: Account is total. If an account exists, it has a payment method because this gets created when they make an order. Before the user makes an order, they don't have an account. ALl paymentMethods belong to some account so paymentMethod is also total.
 
-Cardinality: an account can have many paymentMethods stored for them. Every time they make an order with a different payment method, it gets stored for them. So payment method is many. The same paymentMethod can be used by 2 accounts. say me and my mom both buy something and we make those orders with the same credit card. So account is many.
+Cardinality: An account can have many paymentMethods stored for them. Every time they make an order with a different payment method, it gets stored for them. So payment method is many. Even if the same credit card is used by 2 accounts (like family members), it will be stored as two different entities in the database for security reasons. Therefore making it so each payment method is only asspciated with 1 account. So account is one.
 
 
 
@@ -134,6 +134,13 @@ Attributes:
         - duration
         end time is derived no need to store it
 
+    PaymentMethod
+        - card_number (primary key)
+        - exp_date
+        - security_code
+        - name {first_name, last_name}
+
+
 Relationship Attributes: 
 
     Account orders Cart
@@ -151,7 +158,3 @@ Relationship Attributes:
 
     Cart contains Product
         - quantity
-
-
-
-
