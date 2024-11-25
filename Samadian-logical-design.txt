@@ -1,0 +1,90 @@
+Tables before removing redundant tables:
+
+
+Account (account_id [P], email, password, first_name, last_name, phone_number, date_created, country, state, city, street, zip, level)
+
+Cart (cart_id [P], account_id, status, total_price, num_of_items) 
+    Cart (account_id) references Account (account_id)
+
+Product (product_id [P], product_name, collection_name, price, size, color, intended_gender, description, num_in_stock, release_time, termination_time)
+
+Product_images (product_id [P], image [P]) 
+    Product_images (product_id) references Product (product_id)
+
+Category (category_id [P], category_name)
+
+Discount (discount_id [P], discount_code, discount_name, discount_type, discount_value, eligibility_criteria, release_time, duration)
+
+PaymentMethod (card_number [P], exp_date, security_code, first_name, last_name)
+
+Orders (cart_id [P], account_id, order_timestamp, shipment_company, shipment_price, expected_delivery)
+    Orders (account_id) references Account (account_id)
+    Orders (cart_id) references Cart (cart_id)
+
+Contains (cart_id [P], product_id [P], quantity)
+    Contains (cart_id) references Cart (cart_id)
+    Containst (product_id) references Product (product_id)
+
+BelongsTo (product_id [P], category_id)   ----- REMOVED b/c M-1 and Product is total
+    BelongsTo (product_id) references Product (product_id)
+    BelongsTo (category_id) references Category (category_id)
+
+Reviews (account_id [P], product_id [P], review_id ????, rating, review_description)
+    Reviews (account_id) references Account (account_id)
+    Reviews (product_id) references Product (product_id)
+ 
+Applied_on_cart (cart_id [P], discount_id)
+    Applied_on (cart_id) references Cart (cart_id)
+    Applied_on (discount_id) references Discount (discount_id)
+
+Applied_on_product (discount_id [P], product_id [P])
+    Applied_on (product_id) references Product (product_id)
+    Applied_on (discount_id) references Discount (discount_id)
+
+Uses (card_number [P], account_id)  ---- REMOVED b/c 1-M and PaymentMethod is total
+    Uses (card_number) references PaymentMethod (card_number)
+    Uses (account_id) references Account (account_id)
+
+
+
+Tables after removing redundant tables:
+
+
+Account (account_id [P], email, password, first_name, last_name, phone_number, date_created, country, state, city, street, zip, level)
+
+Cart (cart_id [P], account_id, status, total_price, num_of_items) 
+    Cart (account_id) references Account (account_id)
+
+Product (product_id [P], product_name, collection_name, price, size, color, intended_gender, description, num_in_stock, release_time, termination_time, category_id)
+    Product (category_id) references Category (category_id)
+
+Product_images (product_id [P], image [P]) 
+    Product_images (product_id) references Product (product_id)
+
+Category (category_id [P], category_name)
+
+Discount (discount_id [P], discount_code, discount_name, discount_type, discount_value, eligibility_criteria, release_time, duration)
+
+PaymentMethod (card_number [P], exp_date, security_code, first_name, last_name, account_id)
+    PaymentMethod (account_id) references Account (account_id)
+
+Orders (cart_id [P], account_id, order_timestamp, shipment_company, shipment_price, expected_delivery)
+    Orders (account_id) references Account (account_id)
+    Orders (cart_id) references Cart (cart_id)
+
+Contains (cart_id [P], product_id [P], quantity)
+    Contains (cart_id) references Cart (cart_id)
+    Containst (product_id) references Product (product_id)
+
+Reviews (account_id [P], product_id [P], review_id ????, rating, review_description)
+    Reviews (account_id) references Account (account_id)
+    Reviews (product_id) references Product (product_id)
+ 
+Applied_on_cart (cart_id [P], discount_id)
+    Applied_on (cart_id) references Cart (cart_id)
+    Applied_on (discount_id) references Discount (discount_id)
+
+Applied_on_product (discount_id [P], product_id [P])
+    Applied_on (product_id) references Product (product_id)
+    Applied_on (discount_id) references Discount (discount_id)
+
