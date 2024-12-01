@@ -47,6 +47,9 @@ Uses (card_number [P], account_id)  ---- REMOVED b/c 1-M and PaymentMethod is to
 
 
 
+
+
+
 Tables after removing redundant tables:
 
 
