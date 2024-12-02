@@ -1,7 +1,111 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
+    margin: 0; /* Makes sure there is no default margins to begin with*/
+    padding: 0; /* Makes sure there is no default padding to begin with*/
+    box-sizing: border-box; /* Makes sure the size and location of things includes it's padding and border not just content*/
+    text-decoration: none;  /* Give me plain everything. Links shouldn't have underlines */
+}
+body {
+    min-height: 100vh;
 }
 
+
+header {
+    width: 100%;
+    background-color: rgba(10, 10, 10, 0.932);
+}
+
+/* Default nav ul is for desktop version */
+nav ul {
+    width: 100%; /* Flexbox must span entire width of screen*/
+    list-style: none;  /* Makes sure there's no bullet points or other list style */
+    display: flex; /* All children of this element belong to it's flex-box*/
+    justify-content: flex-end; 
+    /* Putting align-items: center here won't do anything b/c no height was defined*/
+}
+
+nav li {
+    height: 60px;   /* We set the height of the li's and that sets the height of the parent to the height of the li*/
+}
+nav a{
+    height: 100%;
+    padding: 0 9px;
+    color: white;
+    display: flex;
+    align-items: center; /* Aligns elements vertically in respect to parent's height*/
+}
+nav a:hover {
+    color:antiquewhite;
+}
+
+nav li:first-child {
+    margin-right: auto;
+}
+
+
+nav li #logo {
+    /* font-family: sans-serif; */
+    font-size: 45px;
+}
+
+/* Making the cart white so it shows */
+#cart_icon path {
+    stroke: white;
+}
+#cart_icon circle {
+    stroke: white;
+    fill: white;
+}
+#cart_icon:hover path {  /* This means if hover over whole icon, make path antiquewhite*/
+    stroke: antiquewhite;
+}
+
+/* Styling the mobile nav menu*/
+
+.phone_menu {
+    position: fixed; /* We strictly determine it's position */
+    top: 0;
+    left: 0; /* These two combined move it to the top left of the screen */
+    height: 100vh; /* Height is the whole view of the screen */
+    width: 70%; /* I want the sidebar to cover 70% of the screen when opened*/
+    z-index: 99; /* Make sure the phone_menu is above verything else*/
+    background-color: white;
+    box-shadow: -10px 0 10px rgba(0, 0, 0, 2); /* This is just fancy stuff that adds a little depth shadow to the border of the sidebar*/
+
+    display: none; /* I put it as none initally so it hides but when you click on it, JS changes this to flex. When it opens and you hit the X it changes it back to none*/
+    flex-direction: column; /* Vertical flexbox not horizontal. Stuff aligned on top of each other with respect to each other */
+    align-items: start; /* Vertically stick flex-box to the top*/
+    justify-content: start; /* Horizontally stick flex-box to the very left*/
+    padding-left: 15px;
+}
+.phone_menu li {
+    width: 100%;
+}
+#burger {
+    display:none
+}
+
+.phone_menu a {
+    width: 100%;
+    color: black;   /* Since background white we need elements to be black so visible*/
+}
+.phone_menu a:hover {
+    color: black;
+    background-color: rgb(232, 232, 232);
+}
+#X a:hover {
+    background-color: white; /*May change mind but i don't wan the gray for the x*/
+    cursor: pointer;
+}
+
+/* Less than 800 is mobile view */
+@media (max-width: 800px) {
+    .hideOnMobile {
+        display: none;
+    }
+    nav ul {
+        justify-content: space-between;
+    }
+    #burger {
+        display: block; /*Show the burger for mobile*/
+    }
+}
