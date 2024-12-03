@@ -1,7 +1,7 @@
 Tables before removing redundant tables:
 
 
-Account (account_id [P], email, password, first_name, last_name, phone_number, date_created, country, state, city, street, zip, level)
+Account (account_id [P], email, password, first_name, last_name, phone_number, date_created, country, state, city, street, zip, floor_level)
 
 Cart (cart_id [P], account_id, status, total_price, num_of_items) 
     Cart (account_id) references Account (account_id)
@@ -53,7 +53,7 @@ Uses (card_number [P], account_id)  ---- REMOVED b/c 1-M and PaymentMethod is to
 Tables after removing redundant tables:
 
 
-Account (account_id [P], email, password, first_name, last_name, phone_number, date_created, country, state, city, street, zip, level)
+Account (account_id [P], email, password, first_name, last_name, phone_number, date_created, country, state, city, street, zip, floor_level)
 
 Cart (cart_id [P], account_id, status, total_price, num_of_items) 
     Cart (account_id) references Account (account_id)
@@ -79,7 +79,7 @@ Contains (cart_id [P], product_id [P], quantity)
     Contains (cart_id) references Cart (cart_id)
     Containst (product_id) references Product (product_id)
 
-Reviews (account_id [P], product_id [P], review_id ????, rating, review_description)
+Reviews (account_id [P], product_id [P], review_id [P], rating, review_description)
     Reviews (account_id) references Account (account_id)
     Reviews (product_id) references Product (product_id)
  
