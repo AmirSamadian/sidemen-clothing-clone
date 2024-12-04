@@ -30,7 +30,8 @@ CREATE TABLE Cart (
     num_of_items INT NOT NULL,
     PRIMARY KEY(cart_id),
     FOREIGN KEY (account_id) REFERENCES Account (account_id),
-    CHECK(cart_status = 'open' OR cart_status = 'completed')
+    CHECK(cart_status = 'open' OR cart_status = 'completed'),
+    CHECK (num_of_items >= 0)
 );
 
 CREATE TABLE Category (
@@ -70,7 +71,7 @@ CREATE TABLE Product_images (
 CREATE TABLE Discount (
     discount_id SERIAL,
     discount_code VARCHAR(30) UNIQUE,
-    discount_name VARCHAR(100),
+    discount_name VARCHAR(300),
     discount_type VARCHAR(20) NOT NULL, -- e.g., percentage, fixed_amount
     discount_value NUMERIC(5, 2) NOT NULL,
     eligibility_criteria TEXT,
@@ -84,13 +85,14 @@ CREATE TABLE Discount (
 );
 
 CREATE TABLE PaymentMethod (
+    payment_method_id SERIAL,
+    account_id INT NOT NULL,
     card_number VARCHAR(19),
     exp_date DATE NOT NULL,
     security_code CHAR(3) NOT NULL,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
-    account_id INT NOT NULL,
-    PRIMARY KEY (card_number),
+    PRIMARY KEY (payment_method_id),
     FOREIGN KEY (account_id) REFERENCES Account (account_id)
 );
 
