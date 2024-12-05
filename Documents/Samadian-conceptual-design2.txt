@@ -112,7 +112,6 @@ Attributes:
         - price
         - size 
         - color 
-        - intended_gender
         - description
         - images [Multi-valued]
         - num_in_stock
@@ -146,7 +145,7 @@ Relationship Attributes:
     Account orders Cart
         - shipment_price
         - shipment_company   (how is it getting to the customer)
-        - expected_delivery 
+        - expected_delivery (how long it will take to get there)
         - order_timestamp
 
     Account Reviews Product

@@ -26,8 +26,8 @@ CREATE TABLE Cart (
     cart_id SERIAL,
     account_id INTEGER NOT NULL,
     cart_status VARCHAR(9) NOT NULL,
-    total_price NUMERIC(7, 2) NOT NULL,
-    num_of_items INT NOT NULL,
+    total_price NUMERIC(7, 2) NOT NULL, --Has default value of 0
+    num_of_items INT NOT NULL, --Has default value of 0
     PRIMARY KEY(cart_id),
     FOREIGN KEY (account_id) REFERENCES Account (account_id),
     CHECK(cart_status = 'open' OR cart_status = 'completed'),
@@ -47,7 +47,6 @@ CREATE TABLE Product (
     price NUMERIC(7, 2) NOT NULL,
     "size" VARCHAR(10) NOT NULL,
     color VARCHAR(50) NOT NULL,
-    intended_gender VARCHAR(20), 
     product_description TEXT,
     num_in_stock INT NOT NULL,
     release_time TIMESTAMP NOT NULL,
@@ -55,7 +54,6 @@ CREATE TABLE Product (
     category_id INT NOT NULL,
     PRIMARY KEY (product_id),
     FOREIGN KEY (category_id) REFERENCES Category (category_id),
-    CHECK (intended_gender IN ('male', 'female', 'neutral')),
     CHECK (price > 0),
     CHECK (num_in_stock >= 0)
 );
