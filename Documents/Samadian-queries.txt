@@ -1,0 +1,143 @@
+
+
+#########################  1  ########################  Basic  ########################
+
+Data Need: Show all the accounts in the database.
+
+Query:
+
+SELECT * FROM Account;
+
+Database Output:
+
+ account_id |           email           |   acc_password    | first_name | last_name | phone_number |        date_created        | country |     city     |      street       |  zip  | floor_level 
+------------+---------------------------+-------------------+------------+-----------+--------------+----------------------------+---------+--------------+-------------------+-------+-------------
+          1 | testemail@gmail.com       | TestPASS123       | first      | test      | 111-111-1111 | 2024-12-06 08:17:25.991923 | USA     | Wilkes-Barre | 1 Main St.        | 18702 | 
+          2 | john.doe1@gmail.com       | Password123!      | John       | Doe       | 123-456-7890 | 2024-12-06 08:17:26.000418 | USA     | New York     | 101 First Ave.    | 10001 | 
+          3 | jane.smith2@gmail.com     | Password456!      | Jane       | Smith     | 234-567-8901 | 2024-12-06 08:17:26.00273  | USA     | Los Angeles  | 202 Second St.    | 90001 | 
+          4 | bob.johnson3@gmail.com    | BobPass789!       | Bob        | Johnson   | 345-678-9012 | 2024-12-06 08:17:26.005163 | USA     | Chicago      | 303 Third Blvd.   | 60601 | 
+          5 | alice.williams4@gmail.com | AlicePass321!     | Alice      | Williams  | 456-789-0123 | 2024-12-06 08:17:26.007507 | USA     | Houston      | 404 Fourth Ave.   | 77001 | 
+          6 | charlie.brown5@gmail.com  | Charlie123!       | Charlie    | Brown     | 567-890-1234 | 2024-12-06 08:17:26.088306 | USA     | Phoenix      | 505 Fifth St.     | 85001 | 
+          7 | emily.davis6@gmail.com    | EmilyPassword123! | Emily      | Davis     | 678-901-2345 | 2024-12-06 08:17:26.091006 | USA     | Philadelphia | 606 Sixth Ave.    | 19101 | 
+          8 | david.miller7@gmail.com   | DavidPass654!     | David      | Miller    | 789-012-3456 | 2024-12-06 08:17:26.093675 | USA     | San Antonio  | 707 Seventh Blvd. | 78201 | 
+          9 | laura.moore8@gmail.com    | Laura1234Pass!    | Laura      | Moore     | 890-123-4567 | 2024-12-06 08:17:26.095607 | USA     | San Diego    | 808 Eighth St.    | 92101 | 2
+         10 | michael.taylor9@gmail.com | MikePassword987!  | Michael    | Taylor    | 901-234-5678 | 2024-12-06 08:17:26.097619 | USA     | Dallas       | 909 Ninth Ave.    | 75201 | 1
+         11 | susan.jackson10@gmail.com | SusanPass567!     | Susan      | Jackson   | 012-345-6789 | 2024-12-06 08:17:26.099565 | USA     | Austin       | 1010 Tenth Blvd.  | 73301 | 4
+(11 rows)
+
+
+
+#########################  2  ########################  COUNT  ########################
+
+Data Need: How many products are in each category? e.g How many hoodies, chains, pants, etc..  Show categories with no products in it too.
+
+Query:
+
+SELECT c.category_name, COUNT(p.product_id) AS product_count
+FROM Category AS c
+LEFT JOIN Product AS p ON c.category_id = p.category_id
+GROUP BY c.category_name;
+
+Database Output:
+
+ category_name | product_count 
+---------------+---------------
+ T-Shirt       |             1
+ Hoodies       |             8
+ Shorts        |             0
+ Boxers        |             0
+ Backpack      |             0
+ Slides        |             0
+ Sweatshirt    |             0
+ Watch         |             0
+ Pants         |             0
+ Hat           |             0
+ Bandana       |             0
+ Chain         |             0
+ Jacket        |             1
+ Socks         |             0
+ Jersey        |             1
+(15 rows)
+
+
+#########################  3  ########################  HAVING  ########################
+
+Data Need: Finding products that have been sold more than 5 times.
+
+Query: 
+
+SELECT p.product_name, SUM(c.quantity) AS total_sold
+FROM Product AS p
+JOIN Contains AS c ON p.product_id = c.product_id
+GROUP BY p.product_name
+HAVING SUM(c.quantity) > 5;
+
+Database Output:
+
+           product_name           | total_sold 
+----------------------------------+------------
+ W2S Hoodie                       |         10
+ SDMN x Hot Wheels Washed T-Shirt |          7
+(2 rows)
+
+
+
+#########################  4  ########################  At least two joins  ########################
+
+
+Data Need: Retrieve account names and the products they have reviewed.
+
+Query:
+
+SELECT first_name, last_name, product_name
+FROM Reviews NATURAL JOIN Account NATURAL JOIN Product;
+
+
+Database Output:
+
+ first_name | last_name |           product_name           
+------------+-----------+----------------------------------
+ first      | test      | Varsity Basketball Jersey
+ John       | Doe       | SDMN x Hot Wheels Washed T-Shirt
+ Jane       | Smith     | W2S Hoodie
+ Bob        | Johnson   | W2S Hoodie
+ Alice      | Williams  | W2S Hoodie
+ Alice      | Williams  | W2S Hoodie
+ Michael    | Taylor    | W2S Hoodie
+ David      | Miller    | W2S Hoodie
+(8 rows)
+
+
+#########################  5  ########################  Subquery  ########################
+
+
+Data Need: Find the accounts that have placed orders with a total cart price greater than $100. Show full name and email.
+
+Query: 
+
+SELECT a.first_name, a.last_name, a.email FROM Account AS a 
+WHERE a.account_id IN (
+    SELECT o.account_id FROM Orders AS o JOIN Cart AS c ON o.cart_id = c.cart_id WHERE c.total_price > 100
+);
+
+
+Database Output:
+
+ first_name | last_name |           email           
+------------+-----------+---------------------------
+ first      | test      | testemail@gmail.com
+ Jane       | Smith     | jane.smith2@gmail.com
+ Alice      | Williams  | alice.williams4@gmail.com
+ Charlie    | Brown     | charlie.brown5@gmail.com
+ Laura      | Moore     | laura.moore8@gmail.com
+(5 rows)
+
+
+
+
+
+
+
+
+
+

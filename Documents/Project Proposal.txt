@@ -81,7 +81,17 @@ From when to when is the discount available?
 
 
 
+-------
 
+More complex data needs:
+
+How many products are in each category? e.g How many hoodies, chains, pants, etc..  Show categories with no products in it too.
+
+Retrieve account names and the products they have reviewed.
+
+Find the accounts that have placed orders with a total cart price greater than $100. Show full name and email.
+
+Finding products that have been sold more than 5 times.
 
 
 Questions for Dr. Sliva:
