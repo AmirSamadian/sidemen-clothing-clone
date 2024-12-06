@@ -6,7 +6,7 @@ Account (account_id [P], email, password, first_name, last_name, phone_number, d
 Cart (cart_id [P], account_id, status, total_price, num_of_items) 
     Cart (account_id) references Account (account_id)
 
-Product (product_id [P], product_name, collection_name, price, size, color, intended_gender, description, num_in_stock, release_time, termination_time)
+Product (product_id [P], product_name, collection_name, price, size, color, description, num_in_stock, release_time, termination_time)
 
 Product_images (product_id [P], image [P]) 
     Product_images (product_id) references Product (product_id)
@@ -58,7 +58,7 @@ Account (account_id [P], email, password, first_name, last_name, phone_number, d
 Cart (cart_id [P], account_id, status, total_price, num_of_items) 
     Cart (account_id) references Account (account_id)
 
-Product (product_id [P], product_name, collection_name, price, size, color, intended_gender, description, num_in_stock, release_time, termination_time, category_id)
+Product (product_id [P], product_name, collection_name, price, size, color, description, num_in_stock, release_time, termination_time, category_id)
     Product (category_id) references Category (category_id)
 
 Product_images (product_id [P], image [P]) 
@@ -68,7 +68,7 @@ Category (category_id [P], category_name)
 
 Discount (discount_id [P], discount_code, discount_name, discount_type, discount_value, eligibility_criteria, release_time, duration)
 
-PaymentMethod (card_number [P], exp_date, security_code, first_name, last_name, account_id)
+PaymentMethod (payment_method_id [P], card_number, exp_date, security_code, first_name, last_name, account_id)
     PaymentMethod (account_id) references Account (account_id)
 
 Orders (cart_id [P], account_id, order_timestamp, shipment_company, shipment_price, expected_delivery)

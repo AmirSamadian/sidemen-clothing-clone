@@ -134,7 +134,8 @@ Attributes:
         end time is derived no need to store it
 
     PaymentMethod
-        - card_number (primary key)
+        - payment_method_id (primary key)
+        - card_number 
         - exp_date
         - security_code
         - name {first_name, last_name}
