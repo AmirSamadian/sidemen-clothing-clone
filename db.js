@@ -9,7 +9,8 @@ let sshOptions = {
     host: process.env.SSH_HOST,
     port: 22,
     username: process.env.SSH_USER,
-    privateKey: readFileSync(process.env.SSH_PRIVATE_KEY)
+    privateKey: readFileSync(process.env.SSH_PRIVATE_KEY),
+	passphrase: process.env.SSH_PASSPHRASE
 };
 
 let tunnelOptions = {
@@ -62,8 +63,8 @@ let connection = new Promise(function(resolve, reject){
 
 // Get all classes
 const getClasses = (request, response) => {
-	connection.then((conn) => {
-    conn.query('SELECT * FROM classes', (error, results) => {
+	connection.then((conn) => {  //Once the ssh tunnel has been created and db connection is created with pool. Promise resolves to db (database connection)
+    conn.query('SELECT * FROM classes', (error, results) => {  // conn is same as db
       if (error) {
         throw error;
       }
@@ -147,8 +148,8 @@ export default {
 	connection,
 	getClasses,
 	getClassesById,
-	getClassesBySemester,
-	addClass,
-	updateClass,
-	deleteClass
+	//getClassesBySemester,
+	addClass
+	// updateClass,
+	// deleteClass
 };
