@@ -73,9 +73,9 @@ Cardinality explanation: A discount can be applied on many products so product i
 
 ----------------------------------------------------------------------------------------
 
-[T] Account [1] uses [M] PaymentMethod [T]
+[P] Account [1] uses [M] PaymentMethod [T]
 
-Participation: Account is total. If an account exists, it has a payment method because this gets created when they make an order. Before the user makes an order, they don't have an account. ALl paymentMethods belong to some account so paymentMethod is also total.
+Participation: Account is partial. There can be accounts that don't yet have a payment method stored for them. These are accounts that created an account by going to the Create Account page of website instead of by making an order. All accoounts created by making an order have a payment method because this gets created when they make an order. Before the user makes an order, they don't have an account. ALl paymentMethods belong to some account so paymentMethod is also total.
 
 Cardinality: An account can have many paymentMethods stored for them. Every time they make an order with a different payment method, it gets stored for them. So payment method is many. Even if the same credit card is used by 2 accounts (like family members), it will be stored as two different entities in the database for security reasons. Therefore making it so each payment method is only asspciated with 1 account. So account is one.
 
