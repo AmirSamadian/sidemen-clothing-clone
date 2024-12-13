@@ -35,6 +35,11 @@ app.get('/', (request, response) => {
 //app.post('/classes', db.addClass);
 
 // Add your endpoints here
+app.get('/', db.readData);
+// app.get('/', db.createData);
+// app.get('/', db.updateData);
+// app.get('/', db.deleteData);
+
 
 // Start server
 app.listen(process.env.PORT || 3000, () => {

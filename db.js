@@ -113,7 +113,7 @@ const addClass = (request, response) => {
 // READ data from your database using a SELECT query
 const readData = (request, response) => {
 	connection.then((conn) => {
-		conn.query('SELECT * FROM Product WHERE collection_name = SDMN x Hot Wheels', (error, results) => {
+		conn.query('SELECT * FROM project.Product WHERE collection_name = SDMN x Hot Wheels', (error, results) => {
 			if (error)
 				throw error;
 			response.status(200).json(results.rows);
@@ -130,7 +130,7 @@ const createData = (request, response) => {
 		phone_number, date_created, country, city, street, zip, floor_level
 	 } = request.body;
 	conn.query(
-		'INSERT INTO Account VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)', 
+		'INSERT INTO project.Account VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)', 
 
 		[
 			account_id, email, acc_password, first_name, last_name,
@@ -150,7 +150,7 @@ const createData = (request, response) => {
 const updateData = (request, response) => {
 	connection.then((conn) => {
 		const { email, phone_number } = request.body;
-		conn.query('UPDATE Account SET phone_number = $1 WHERE email = $2',
+		conn.query('UPDATE project.Account SET phone_number = $1 WHERE email = $2',
 			[phone_number, email],
 			(error, results) => {
 				if (error)
@@ -186,8 +186,12 @@ export default {
 	connection,
 	getClasses,
 	getClassesById,
+	addClass,
+	readData,
+	createData,
+	updateData,
+	deleteData
 	//getClassesBySemester,
-	addClass
 	// updateClass,
 	// deleteClass
 };
