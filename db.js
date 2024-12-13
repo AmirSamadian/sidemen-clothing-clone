@@ -3,6 +3,7 @@ const { createTunnel } = pkg;
 import pkg2 from 'pg';
 const { Pool } = pkg2;
 import pkg3 from 'fs';
+import { userInfo } from 'os';
 const { readFileSync } = pkg3;
 
 let sshOptions = {
@@ -102,44 +103,78 @@ const addClass = (request, response) => {
 };
 
 
- /***********************************************/
- /*       CRUD FUNCTIONS FOR YOUR PROJECT       */
- /***********************************************/
+ /**********************************************************/
+ /*             CRUD FUNCTIONS FOR YOUR PROJECT            */
+ /**********************************************************/
 
 // READ data from your database using a SELECT query
 const readData = (request, response) => {
 	connection.then((conn) => {
-
-    // Write a query to SELECT data fron your DB
-
+		conn.query('SELECT * FROM Product WHERE collection_name = SDMN x Hot Wheels', (error, results) => {
+			if (error)
+				throw error;
+			response.status(200).json(results.rows);
+		})
 	});
 };
 
+//CRUD Create
 // Add a new row to the database using INSERT INTO
 const createData = (request, response) => {
 	connection.then((conn) => {
-  	const { id, title, semester, year } = request.body;
+  	const { 
+		account_id, email, acc_password, first_name, last_name,
+		phone_number, date_created, country, city, street, zip, floor_level
+	 } = request.body;
+	conn.query(
+		'INSERT INTO Account VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)', 
 
-  	    // Write a query to INSERT data into your DB
-
+		[
+			account_id, email, acc_password, first_name, last_name,
+			phone_number, date_created, country, city, street, zip, floor_level
+		], 
+	
+		(error, results) => {
+			if (error)
+				throw error;
+			response.status(201).send(`Account added with ID ${account_id} and email ${email}`);
+		} )
 	});
 };
 
 // Update an existing row using UPDATE
+// Updating phone numbers
 const updateData = (request, response) => {
 	connection.then((conn) => {
-
-    // Add a query to UPDATE data in your DB
-
+		const { email, phone_number } = request.body;
+		conn.query('UPDATE Account SET phone_number = $1 WHERE email = $2',
+			[phone_number, email],
+			(error, results) => {
+				if (error)
+					throw error;
+				response.status(200).send(`Phone number updated to ${phone_number}`);
+			}
+		)
 	});
 };
 
+//Another idea. For discounts, update all products with X attribute, to cut price
+
+
+
 // Delete an existing row using DELETE
+// Deleting all products from a certain collection. Assuming the termination time has arrived. Termination time checking done in the frontend.
 const deleteData = (request, response) => {
 	connection.then((conn) => {
-
-    // Add a query to DELETE data in your DB
-
+		const { collection_name } = request.body;
+		conn.query('DELETE FROM Product WHERE collection_name = $1',
+			[collection_name],
+			(error, results) => {
+				if (error)
+					throw error;
+				response.status(200).send(`The collection ${collection_name} is no longer available.`);
+			}
+		)
 	});
 };
 
