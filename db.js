@@ -3,8 +3,11 @@ const { createTunnel } = pkg;
 import pkg2 from 'pg';
 const { Pool } = pkg2;
 import pkg3 from 'fs';
+import dotenv from 'dotenv';
+dotenv.config();
 import { userInfo } from 'os';
 const { readFileSync } = pkg3;
+
 
 let sshOptions = {
     host: process.env.SSH_HOST,
