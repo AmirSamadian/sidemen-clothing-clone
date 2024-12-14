@@ -23,7 +23,7 @@ Orders (cart_id [P], account_id, order_timestamp, shipment_company, shipment_pri
 
 Contains (cart_id [P], product_id [P], quantity)
     Contains (cart_id) references Cart (cart_id)
-    Containst (product_id) references Product (product_id)
+    Contains (product_id) references Product (product_id)
 
 BelongsTo (product_id [P], category_id)   ----- REMOVED b/c M-1 and Product is total
     BelongsTo (product_id) references Product (product_id)
