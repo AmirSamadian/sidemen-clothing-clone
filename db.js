@@ -154,29 +154,52 @@ const readData2 = (request, response) => {
   };
 
 
+  
+
+
 //CRUD Create
 // Add a new row to the database using INSERT INTO
 const createData = (request, response) => {
+	console.log("createData function called");
 	connection.then((conn) => {
-  	const { 
-		email, acc_password, first_name, last_name,
-		phone_number, date_created, country, city, street, zip, floor_level
-	 } = request.body;
-	conn.query(
-		'INSERT INTO project.Account VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)', 
-
-		[
+		console.log("Database connection established"); 
+		const { 
 			email, acc_password, first_name, last_name,
-			phone_number, date_created, country, city, street, zip, floor_level
-		], 
-	
-		(error, results) => {
-			if (error)
-				throw error;
-			response.status(201).send(`Account added with ID ${account_id} and email ${email}`);
-		} )
-	});
+			phone_number, country, city, street, zip, floor_level
+		} = request.body;
+
+		let floor_level_value;
+		if (floor_level.toLowerCase() === 'null') {
+			floor_level_value = null;
+		} else 
+			floor_level_value = floor_level;
+
+		conn.query(
+			'INSERT INTO project.Account VALUES (DEFAULT, $1, $2, $3, $4, $5, NOW(), $6, $7, $8, $9, $10)', 
+
+			[
+				email, acc_password, first_name, last_name,
+				phone_number, country, city, street, zip, floor_level_value
+			], 
+		
+			(error, results) => {
+				if (error) {
+					console.error("Error executing query:", error);
+					response.status(500).json({ error: "Database query failed" });
+					return;
+				}
+				response.status(201).send(`Account added with email ${email} and last name ${last_name}`);
+			} )
+		})
+		.catch((error) => {
+			console.error("Error establishing connection:", error); 
+			response.status(500).json({ error: "Database connection failed" });
+		});;
 };
+
+
+
+
 
 // Update an existing row using UPDATE
 // Updating phone numbers
