@@ -120,15 +120,15 @@ const addClass = (request, response) => {
 
 
 const readData = (request, response) => {
-	console.log("readData2 function called"); 
+	console.log("readData function called"); 
   
 	connection
 	  .then((conn) => {
 		console.log("Database connection established"); 
-		const query = "SELECT * FROM project.Product WHERE collection_name = 'SDMN x Hot Wheels'";
+		const collection_name = request.params.collection_name;
+		const query = "SELECT * FROM project.Product WHERE collection_name = $1";
 		console.log("Executing query:", query);
-  
-		conn.query(query, (error, results) => {
+		conn.query(query, [collection_name] , (error, results) => {
 		  if (error) {
 			console.error("Error executing query:", error);
 			response.status(500).json({ error: "Database query failed" });
@@ -153,10 +153,11 @@ const readData = (request, response) => {
 	connection
 	  .then((conn) => {
 		console.log("Database connection established"); 
-		const query = "SELECT * FROM project.Account WHERE last_name = 'Griezmann'";
+		const last_name = request.params.last_name;
+		const query = "SELECT * FROM project.Account WHERE last_name = $1";
 		console.log("Executing query:", query);
   
-		conn.query(query, (error, results) => {
+		conn.query(query, [last_name], (error, results) => {
 		  if (error) {
 			console.error("Error executing query:", error);
 			response.status(500).json({ error: "Database query failed" });
@@ -209,7 +210,7 @@ const createData = (request, response) => {
 					response.status(500).json({ error: "Database query failed" });
 					return;
 				}
-				console.log("Query executed successfully, results:", results.rows);
+				console.log("Insert executed successfully, results:", results.rows);
 				response.status(201).send(`Account added with email ${email} and last name ${last_name}`);
 			} )
 		})
@@ -227,17 +228,28 @@ const createData = (request, response) => {
 // Update an existing row using UPDATE
 // Updating phone numbers
 const updateData = (request, response) => {
+	console.log("updateData function called");
 	connection.then((conn) => {
-		const { email, phone_number } = request.body;
+		console.log("Database connection established");
+		const email = request.params.email;
+		const new_number = request.params.new_number
 		conn.query('UPDATE project.Account SET phone_number = $1 WHERE email = $2',
-			[phone_number, email],
+			[new_number, email],
 			(error, results) => {
-				if (error)
-					throw error;
+				if (error) {
+					console.error("Error executing query:", error);
+					response.status(500).json({ error: "Database query failed" });
+					return;
+				}
+				console.log("Update executed successfully, results:", results.rows);
 				response.status(200).send(`Phone number updated to ${phone_number}`);
 			}
 		)
-	});
+	})
+	.catch((error) => {
+		console.error("Error establishing connection:", error); 
+		response.status(500).json({ error: "Database connection failed" });
+	});;
 };
 
 //Another idea. For discounts, update all products with X attribute, to cut price
