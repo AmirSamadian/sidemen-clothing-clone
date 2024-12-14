@@ -1,0 +1,3 @@
+curl --data "account_id=DEFAULT&email=antoine.griezmann7@gmail.com&acc_password=Atleti#7&first_name=Antoine&last_name=Griezmann&phone_number=777-345-3449&date_created=NOW()&country=Spain&city=Madrid&street=4 Luis Aragones Avenue&zip=28022&floor_level=null" http://localhost:3000/testCreate
+
+

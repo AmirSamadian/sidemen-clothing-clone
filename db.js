@@ -113,27 +113,60 @@ const addClass = (request, response) => {
 // READ data from your database using a SELECT query
 const readData = (request, response) => {
 	connection.then((conn) => {
-		conn.query('SELECT * FROM project.Product WHERE collection_name = SDMN x Hot Wheels', (error, results) => {
-			if (error)
-				throw error;
+		const queryText = "SELECT * FROM project.Product WHERE collection_name = 'SDMN x Hot Wheels'"
+		conn.query(queryText, (error, results) => {
+			if (error) {
+				console.error("Database query error from readData CRUD function: ", error);
+				return response.status(500).json({ error: 'Database query failed' });
+				// I added these two lines of code for better debugging so I could actually see what the error is.
+			}
 			response.status(200).json(results.rows);
 		})
 	});
 };
+
+console.log('testing');
+
+const readData2 = (request, response) => {
+	console.log("readData2 function called"); 
+  
+	connection
+	  .then((conn) => {
+		console.log("Database connection established"); 
+		const query = "SELECT * FROM project.Product WHERE collection_name = 'SDMN x Hot Wheels'";
+		console.log("Executing query:", query);
+  
+		conn.query(query, (error, results) => {
+		  if (error) {
+			console.error("Error executing query:", error);
+			response.status(500).json({ error: "Database query failed" });
+			return;
+		  }
+  
+		  console.log("Query executed successfully, results:", results.rows);
+		  response.status(200).json(results.rows); 
+		});
+	  })
+	  .catch((error) => {
+		console.error("Error establishing connection:", error); 
+		response.status(500).json({ error: "Database connection failed" });
+	  });
+  };
+
 
 //CRUD Create
 // Add a new row to the database using INSERT INTO
 const createData = (request, response) => {
 	connection.then((conn) => {
   	const { 
-		account_id, email, acc_password, first_name, last_name,
+		email, acc_password, first_name, last_name,
 		phone_number, date_created, country, city, street, zip, floor_level
 	 } = request.body;
 	conn.query(
 		'INSERT INTO project.Account VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)', 
 
 		[
-			account_id, email, acc_password, first_name, last_name,
+			email, acc_password, first_name, last_name,
 			phone_number, date_created, country, city, street, zip, floor_level
 		], 
 	
@@ -190,6 +223,7 @@ export default {
 	readData,
 	createData,
 	updateData,
+	readData2,
 	deleteData
 	//getClassesBySemester,
 	// updateClass,
