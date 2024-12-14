@@ -22,6 +22,13 @@ INSERT INTO Account VALUES (DEFAULT, 'michael.taylor9@gmail.com', 'MikePassword9
 INSERT INTO Account VALUES (DEFAULT, 'susan.jackson10@gmail.com', 'SusanPass567!', 'Susan', 'Jackson', '012-345-6789', NOW(), 'USA', 'Austin', '1010 Tenth Blvd.', '73301', '4');
 
 
+--This one isn't in the database yet. I'm gonna add this through my CREATE CRUD function in lab7
+INSERT INTO Account VALUES (DEFAULT, 'antoine.griezmann7@gmail.com', 'Atleti#7', 'Antoine', 'Griezmann', '777-345-3449', NOW(), 'Spain', 'Madrid', '4 Luis Aragones Avenue', '28022', null);
+
+
+-- Note: Later on, I will try to figure out how to make the passwords hashed so I'm not storing plain text passwords
+
+
 
 -- Completed cart with updated total_price and num_of_items
 INSERT INTO Cart VALUES (DEFAULT, 1, 'completed', 198.00, 3); -- Ordered so it made an account for them
@@ -96,7 +103,7 @@ INSERT INTO Product VALUES (DEFAULT, 'Varsity Basketball Jersey', 'Imperial Vars
 50, '2024-08-13 12:00', '2026-08-13 12:00', 2);
 
 
---Put more combinations of this product
+--Put more combinations of this product later
 --Put other T-shirts
 
 ----------------
@@ -299,7 +306,7 @@ INSERT INTO PaymentMethod VALUES (DEFAULT, 11, '0123456701234567', '2025-06-14',
 ----------------------------------------------------------------------------------------
 
 
--- Orders  (I only selected the completed tables)
+-- Orders  (I only selected the completed carts in the insertions for cart table)
 
 INSERT INTO Orders VALUES (1,1, NOW(), 'FedEx', 10.00, NOW() + INTERVAL '5 days');
 

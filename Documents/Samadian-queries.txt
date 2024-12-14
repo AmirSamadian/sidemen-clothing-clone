@@ -62,24 +62,23 @@ Database Output:
 
 #########################  3  ########################  HAVING  ########################
 
-Data Need: Finding products that have been sold more than 5 times.
+Data Need: Finding products that have been sold at least 5 times.
 
 Query: 
 
-SELECT p.product_name, SUM(c.quantity) AS total_sold
-FROM Product AS p
-JOIN Contains AS c ON p.product_id = c.product_id
-GROUP BY p.product_name
-HAVING SUM(c.quantity) > 5;
+SELECT product_name, SUM(quantity) 
+FROM Product NATURAL JOIN Contains JOIN Orders ON Contains.cart_id = Orders.cart_id
+GROUP BY product_name
+HAVING SUM(quantity) >= 5;
+
 
 Database Output:
 
-           product_name           | total_sold 
-----------------------------------+------------
- W2S Hoodie                       |         10
- SDMN x Hot Wheels Washed T-Shirt |          7
+           product_name           | sum 
+----------------------------------+-----
+ W2S Hoodie                       |   6
+ SDMN x Hot Wheels Washed T-Shirt |   7
 (2 rows)
-
 
 
 #########################  4  ########################  At least two joins  ########################
