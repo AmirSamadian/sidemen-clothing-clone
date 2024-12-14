@@ -1,3 +1,40 @@
-curl --data "account_id=DEFAULT&email=antoine.griezmann7@gmail.com&acc_password=Atleti#7&first_name=Antoine&last_name=Griezmann&phone_number=777-345-3449&date_created=NOW()&country=Spain&city=Madrid&street=4 Luis Aragones Avenue&zip=28022&floor_level=null" http://localhost:3000/testCreate
+
+Curl command for inserting the account for Antoine Griezmann into the database
+
+curl --data "email=antoine.griezmann7@gmail.com&acc_password=Atleti#7&first_name=Antoine&last_name=Griezmann&phone_number=777-345-3449&country=Spain&city=Madrid&street=4 Luis Aragones Avenue&zip=28022&floor_level=null" http://localhost:3000/testCreate
+
+
+Got this message in terminal:
+amirsamadian@FGH100304M07 database-management-project-AmirSamadian % curl --data "email=antoine.griezmann7@gmail.com&acc_password=Atleti#7&first_name=Antoine&last_name=Griezmann&phone_number=777-345-3449&country=Spain&city=Madrid&street=4 Luis Aragones Avenue&zip=28022&floor_level=null" http://localhost:3000/testCreate
+Account added with email antoine.griezmann7@gmail.com and last name Griezmann%                                                                                    
+amirsamadian@FGH100304M07 database-management-project-AmirSamadian % 
+
+I was able to do the following directly in the database after I did the curl so that means it works:
+
+amirahmadsamadian=> SELECT * FROM project.Account WHERE last_name = 'Griezmann';
+ account_id |            email             | acc_password | first_name | last_name | phone_number |        date_created        | country |  city  |         street         |  zip  | floor_level 
+------------+------------------------------+--------------+------------+-----------+--------------+----------------------------+---------+--------+------------------------+-------+-------------
+         12 | antoine.griezmann7@gmail.com | Atleti#7     | Antoine    | Griezmann | 777-345-3449 | 2024-12-14 21:37:17.088315 | Spain   | Madrid | 4 Luis Aragones Avenue | 28022 | 
+(1 row)
+
+
+Browser at http://localhost:3000/testCreate shows:
+
+[
+  {
+    "account_id": 12,
+    "email": "antoine.griezmann7@gmail.com",
+    "acc_password": "Atleti#7",
+    "first_name": "Antoine",
+    "last_name": "Griezmann",
+    "phone_number": "777-345-3449",
+    "date_created": "2024-12-15T02:37:17.088Z",
+    "country": "Spain",
+    "city": "Madrid",
+    "street": "4 Luis Aragones Avenue",
+    "zip": "28022",
+    "floor_level": null
+  }
+]
 
 

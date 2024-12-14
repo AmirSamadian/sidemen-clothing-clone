@@ -110,24 +110,16 @@ const addClass = (request, response) => {
  /*             CRUD FUNCTIONS FOR YOUR PROJECT            */
  /**********************************************************/
 
+
+ console.log('testing');
+
+//////////////////////////////// READ CRUDS /////////////////////////////////////
+
+
 // READ data from your database using a SELECT query
+
+
 const readData = (request, response) => {
-	connection.then((conn) => {
-		const queryText = "SELECT * FROM project.Product WHERE collection_name = 'SDMN x Hot Wheels'"
-		conn.query(queryText, (error, results) => {
-			if (error) {
-				console.error("Database query error from readData CRUD function: ", error);
-				return response.status(500).json({ error: 'Database query failed' });
-				// I added these two lines of code for better debugging so I could actually see what the error is.
-			}
-			response.status(200).json(results.rows);
-		})
-	});
-};
-
-console.log('testing');
-
-const readData2 = (request, response) => {
 	console.log("readData2 function called"); 
   
 	connection
@@ -154,7 +146,36 @@ const readData2 = (request, response) => {
   };
 
 
+  //This is just to test if the create CRUD function I did will work if I use get. Required by assignment
+  const readToTestCreateCRUD = (request, response) => {
+	console.log("readToTestCreateCRUD function called"); 
   
+	connection
+	  .then((conn) => {
+		console.log("Database connection established"); 
+		const query = "SELECT * FROM project.Account WHERE last_name = 'Griezmann'";
+		console.log("Executing query:", query);
+  
+		conn.query(query, (error, results) => {
+		  if (error) {
+			console.error("Error executing query:", error);
+			response.status(500).json({ error: "Database query failed" });
+			return;
+		  }
+		  
+		  console.log("Query executed successfully, results:", results.rows);
+		  response.status(200).json(results.rows); 
+		});
+	  })
+	  .catch((error) => {
+		console.error("Error establishing connection:", error); 
+		response.status(500).json({ error: "Database connection failed" });
+	  });
+  };
+
+
+//////////////////////////////// CREATE CRUDS /////////////////////////////////////
+
 
 
 //CRUD Create
@@ -188,6 +209,7 @@ const createData = (request, response) => {
 					response.status(500).json({ error: "Database query failed" });
 					return;
 				}
+				console.log("Query executed successfully, results:", results.rows);
 				response.status(201).send(`Account added with email ${email} and last name ${last_name}`);
 			} )
 		})
@@ -198,6 +220,7 @@ const createData = (request, response) => {
 };
 
 
+//////////////////////////////// UPDATE CRUDS /////////////////////////////////////
 
 
 
@@ -218,6 +241,11 @@ const updateData = (request, response) => {
 };
 
 //Another idea. For discounts, update all products with X attribute, to cut price
+
+
+
+//////////////////////////////// DELETE CRUDS /////////////////////////////////////
+
 
 
 
@@ -246,7 +274,7 @@ export default {
 	readData,
 	createData,
 	updateData,
-	readData2,
+	readToTestCreateCRUD,
 	deleteData
 	//getClassesBySemester,
 	// updateClass,

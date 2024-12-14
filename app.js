@@ -35,11 +35,12 @@ app.get('/', (request, response) => {
 //app.post('/classes', db.addClass);
 
 // Add your endpoints here
-// app.get('/', db.readData);
-app.get('/testRead', db.readData2);  //each endpoint must have a different '/' Why? Learn about it
+app.get('/testRead', db.readData);  //each endpoint must have a different '/' Why? Learn about it
 app.post('/testCreate', db.createData);
+app.get('/testCreate', db.readToTestCreateCRUD)
 app.put('/testUpdate', db.updateData);
 app.delete('/testDelete', db.deleteData);
+
 
 
 // Start server
