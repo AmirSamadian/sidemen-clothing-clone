@@ -20,14 +20,14 @@ app.use(
 app.use(cors())
 
 // Set up where to find the static frontend elements (html, css, js, images, files, etc.)
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
-app.use(express.static(path.join(__dirname, '')));
+const __dirname = decodeURIComponent(path.dirname(new URL(import.meta.url).pathname));
+app.use(express.static(path.join(__dirname, 'webapp', 'frontend')));
 
-// function for default HTML get request
+
+// Default get response for http://localhost:3000/ 
 app.get('/', (request, response) => {
-
-  response.json({ info: 'CS256 Fall 2024 Lab' });
-});
+  response.sendFile(path.join(__dirname, 'webapp', 'frontend', 'index.html')); 
+}); 
 
 // Set API Endpoints
 //app.get('/classes', db.getClasses);
