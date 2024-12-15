@@ -44,6 +44,7 @@ app.put('/testUpdate', db.updateData);
 app.get('/testUpdate/:email', db.readToTestUpdateCRUD)
 
 app.delete('/testDelete', db.deleteData);
+app.get('/testDelete', db.readToTestDeleteCRUD);
 
 
 

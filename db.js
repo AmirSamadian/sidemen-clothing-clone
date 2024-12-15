@@ -205,6 +205,33 @@ const readData = (request, response) => {
 	  };
 
 
+	  const readToTestDeleteCRUD = (request, response) => {
+		console.log("readToTestDeleteCRUD function called"); 
+	  
+		connection
+		  .then((conn) => {
+			console.log("Database connection established"); 
+			const query = "SELECT * FROM project.Account";
+			console.log("Executing query:", query);
+	  
+			conn.query(query, (error, results) => {
+			  if (error) {
+				console.error("Error executing query:", error);
+				response.status(500).json({ error: "Database query failed" });
+				return;
+			  }
+			  
+			  console.log("Query executed successfully, results:", results.rows);
+			  response.status(200).json(results.rows); 
+			});
+		  })
+		  .catch((error) => {
+			console.error("Error establishing connection:", error); 
+			response.status(500).json({ error: "Database connection failed" });
+		  });
+	  };
+
+
 
 //////////////////////////////// CREATE CRUDS /////////////////////////////////////
 
@@ -335,7 +362,8 @@ export default {
 	updateData,
 	readToTestCreateCRUD,
 	readToTestUpdateCRUD,
-	deleteData
+	deleteData,
+	readToTestDeleteCRUD
 	//getClassesBySemester,
 	// updateClass,
 	// deleteClass
