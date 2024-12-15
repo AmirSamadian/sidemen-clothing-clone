@@ -289,22 +289,39 @@ const updateData = (request, response) => {
 //////////////////////////////// DELETE CRUDS /////////////////////////////////////
 
 
-
-
 // Delete an existing row using DELETE
 // Deleting all products from a certain collection. Assuming the termination time has arrived. Termination time checking done in the frontend.
 const deleteData = (request, response) => {
+	console.log("deleteData function called");
 	connection.then((conn) => {
-		const { collection_name } = request.body;
-		conn.query('DELETE FROM Product WHERE collection_name = $1',
-			[collection_name],
+		console.log("Database connection established");
+		const { account_id } = request.body;
+		console.log(account_id);
+		conn.query('DELETE FROM project.Account WHERE account_id = $1',
+			[account_id],
 			(error, results) => {
-				if (error)
-					throw error;
-				response.status(200).send(`The collection ${collection_name} is no longer available.`);
+				if (error) {
+					console.error("Error executing query:", error);
+					response.status(500).json({ error: "Database query failed" });
+					return;
+				}
+
+				// I put this to check if any rows were deleted. This doesn't get handled by the error condition above so it will go unoticed.
+				if (results.rowCount === 0) {
+					console.log(`No account found with id ${account_id}`);
+					response.status(404).send(`No account found with id ${account_id}`);
+					return;
+				}
+
+				console.log(`Delete executed successfully. Deleted ${results.rowCount} row(s).`);
+				response.status(200).send(`The account with id ${account_id} is no longer available.`);
 			}
 		)
-	});
+	})
+	.catch((error) => {
+		console.error("Error establishing connection:", error); 
+		response.status(500).json({ error: "Database connection failed" });
+	});;
 };
 
 // Export the database connection and CRUD functions

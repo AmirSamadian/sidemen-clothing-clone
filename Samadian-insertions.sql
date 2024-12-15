@@ -25,6 +25,9 @@ INSERT INTO Account VALUES (DEFAULT, 'susan.jackson10@gmail.com', 'SusanPass567!
 --This one isn't in the database yet. I'm gonna add this through my CREATE CRUD function in lab7
 INSERT INTO Account VALUES (DEFAULT, 'antoine.griezmann7@gmail.com', 'Atleti#7', 'Antoine', 'Griezmann', '777-345-3449', NOW(), 'Spain', 'Madrid', '4 Luis Aragones Avenue', '28022', null);
 
+--Making this person so I can delete it with my CRUD Delete function
+INSERT INTO Account VALUES (DEFAULT, 'go.away@gmail.com', 'urTrash11', 'Go', 'Away', '777-345-9999', NOW(), 'USA', 'Scranton', '4 kaka Avenue', '22211', null);
+
 
 -- Note: Later on, I will try to figure out how to make the passwords hashed so I'm not storing plain text passwords
 

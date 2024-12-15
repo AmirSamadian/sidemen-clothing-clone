@@ -72,3 +72,54 @@ Browser result:
 
 ///////////////////////////// DELETE ///////////////////////////////////////////////////////
 
+
+curl -X "DELETE" --data "account_id=13" http://localhost:3000/testDelete/
+
+Terminal Output:
+
+amirsamadian@FGH100304M07 database-management-project-AmirSamadian % curl -X "DELETE" --data "account_id=13" http://localhost:3000/testDelete
+The account with id 13 is no longer available.%    
+
+Old table:
+
+amirahmadsamadian=> SELECT * FROM account;
+ account_id |            email             |   acc_password    | first_name | last_name | phone_number |        date_created        | country |     city     |         street         |  zip  | floor_level 
+------------+------------------------------+-------------------+------------+-----------+--------------+----------------------------+---------+--------------+------------------------+-------+-------------
+          1 | testemail@gmail.com          | TestPASS123       | first      | test      | 111-111-1111 | 2024-12-06 08:17:25.991923 | USA     | Wilkes-Barre | 1 Main St.             | 18702 | 
+          2 | john.doe1@gmail.com          | Password123!      | John       | Doe       | 123-456-7890 | 2024-12-06 08:17:26.000418 | USA     | New York     | 101 First Ave.         | 10001 | 
+          3 | jane.smith2@gmail.com        | Password456!      | Jane       | Smith     | 234-567-8901 | 2024-12-06 08:17:26.00273  | USA     | Los Angeles  | 202 Second St.         | 90001 | 
+          4 | bob.johnson3@gmail.com       | BobPass789!       | Bob        | Johnson   | 345-678-9012 | 2024-12-06 08:17:26.005163 | USA     | Chicago      | 303 Third Blvd.        | 60601 | 
+          5 | alice.williams4@gmail.com    | AlicePass321!     | Alice      | Williams  | 456-789-0123 | 2024-12-06 08:17:26.007507 | USA     | Houston      | 404 Fourth Ave.        | 77001 | 
+          6 | charlie.brown5@gmail.com     | Charlie123!       | Charlie    | Brown     | 567-890-1234 | 2024-12-06 08:17:26.088306 | USA     | Phoenix      | 505 Fifth St.          | 85001 | 
+          7 | emily.davis6@gmail.com       | EmilyPassword123! | Emily      | Davis     | 678-901-2345 | 2024-12-06 08:17:26.091006 | USA     | Philadelphia | 606 Sixth Ave.         | 19101 | 
+          8 | david.miller7@gmail.com      | DavidPass654!     | David      | Miller    | 789-012-3456 | 2024-12-06 08:17:26.093675 | USA     | San Antonio  | 707 Seventh Blvd.      | 78201 | 
+          9 | laura.moore8@gmail.com       | Laura1234Pass!    | Laura      | Moore     | 890-123-4567 | 2024-12-06 08:17:26.095607 | USA     | San Diego    | 808 Eighth St.         | 92101 | 2
+         10 | michael.taylor9@gmail.com    | MikePassword987!  | Michael    | Taylor    | 901-234-5678 | 2024-12-06 08:17:26.097619 | USA     | Dallas       | 909 Ninth Ave.         | 75201 | 1
+         11 | susan.jackson10@gmail.com    | SusanPass567!     | Susan      | Jackson   | 101-101-1010 | 2024-12-06 08:17:26.099565 | USA     | Austin       | 1010 Tenth Blvd.       | 73301 | 4
+         13 | go.away@gmail.com            | urTrash11         | Go         | Away      | 777-345-9999 | 2024-12-15 04:15:45.905547 | USA     | Scranton     | 4 kaka Avenue          | 22211 | 
+         14 | antoine.griezmann7@gmail.com | Atleti#7          | Antoine    | Griezmann | 777-345-3449 | 2024-12-15 04:24:56.527857 | Spain   | Madrid       | 4 Luis Aragones Avenue | 28022 | 
+(13 rows)
+
+
+New table:
+
+amirahmadsamadian=> SELECT * FROM account;
+ account_id |            email             |   acc_password    | first_name | last_name | phone_number |        date_created        | country |     city     |         street         |  zip  | floor_level 
+------------+------------------------------+-------------------+------------+-----------+--------------+----------------------------+---------+--------------+------------------------+-------+-------------
+          1 | testemail@gmail.com          | TestPASS123       | first      | test      | 111-111-1111 | 2024-12-06 08:17:25.991923 | USA     | Wilkes-Barre | 1 Main St.             | 18702 | 
+          2 | john.doe1@gmail.com          | Password123!      | John       | Doe       | 123-456-7890 | 2024-12-06 08:17:26.000418 | USA     | New York     | 101 First Ave.         | 10001 | 
+          3 | jane.smith2@gmail.com        | Password456!      | Jane       | Smith     | 234-567-8901 | 2024-12-06 08:17:26.00273  | USA     | Los Angeles  | 202 Second St.         | 90001 | 
+          4 | bob.johnson3@gmail.com       | BobPass789!       | Bob        | Johnson   | 345-678-9012 | 2024-12-06 08:17:26.005163 | USA     | Chicago      | 303 Third Blvd.        | 60601 | 
+          5 | alice.williams4@gmail.com    | AlicePass321!     | Alice      | Williams  | 456-789-0123 | 2024-12-06 08:17:26.007507 | USA     | Houston      | 404 Fourth Ave.        | 77001 | 
+          6 | charlie.brown5@gmail.com     | Charlie123!       | Charlie    | Brown     | 567-890-1234 | 2024-12-06 08:17:26.088306 | USA     | Phoenix      | 505 Fifth St.          | 85001 | 
+          7 | emily.davis6@gmail.com       | EmilyPassword123! | Emily      | Davis     | 678-901-2345 | 2024-12-06 08:17:26.091006 | USA     | Philadelphia | 606 Sixth Ave.         | 19101 | 
+          8 | david.miller7@gmail.com      | DavidPass654!     | David      | Miller    | 789-012-3456 | 2024-12-06 08:17:26.093675 | USA     | San Antonio  | 707 Seventh Blvd.      | 78201 | 
+          9 | laura.moore8@gmail.com       | Laura1234Pass!    | Laura      | Moore     | 890-123-4567 | 2024-12-06 08:17:26.095607 | USA     | San Diego    | 808 Eighth St.         | 92101 | 2
+         10 | michael.taylor9@gmail.com    | MikePassword987!  | Michael    | Taylor    | 901-234-5678 | 2024-12-06 08:17:26.097619 | USA     | Dallas       | 909 Ninth Ave.         | 75201 | 1
+         11 | susan.jackson10@gmail.com    | SusanPass567!     | Susan      | Jackson   | 101-101-1010 | 2024-12-06 08:17:26.099565 | USA     | Austin       | 1010 Tenth Blvd.       | 73301 | 4
+         14 | antoine.griezmann7@gmail.com | Atleti#7          | Antoine    | Griezmann | 777-345-3449 | 2024-12-15 04:24:56.527857 | Spain   | Madrid       | 4 Luis Aragones Avenue | 28022 | 
+(12 rows)
+
+
+From Browser:
+
