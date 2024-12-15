@@ -61,7 +61,14 @@ amirahmadsamadian=> SELECT email, phone_number FROM project.Account WHERE email 
  susan.jackson10@gmail.com | 101-101-1010
 (1 row)
 
+Browser result:
 
+[
+  {
+    "email": "susan.jackson10@gmail.com",
+    "phone_number": "101-101-1010"
+  }
+]
 
 ///////////////////////////// DELETE ///////////////////////////////////////////////////////
 
