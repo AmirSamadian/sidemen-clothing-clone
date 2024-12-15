@@ -24,18 +24,16 @@ const __dirname = decodeURIComponent(path.dirname(new URL(import.meta.url).pathn
 app.use(express.static(path.join(__dirname, 'webapp', 'frontend')));
 
 
+
+
 // Default get response for http://localhost:3000/ 
 app.get('/', (request, response) => {
   response.sendFile(path.join(__dirname, 'webapp', 'frontend', 'index.html')); 
 }); 
 
-// Set API Endpoints
-//app.get('/classes', db.getClasses);
-//app.get('/classes/:id', db.getClassesById);
-//app.post('/classes', db.addClass);
 
-// Add your endpoints here
-app.get('/testRead/:collection_name', db.readData);  //each endpoint must have a different '/' Why? Learn about it
+//  Endpoints for lab7. 
+app.get('/testRead/:collection_name', db.readData);  //each get endpoint must have a different route
 
 app.post('/testCreate', db.createData);
 app.get('/testCreate/:last_name', db.readToTestCreateCRUD)
@@ -52,3 +50,19 @@ app.get('/testDelete', db.readToTestDeleteCRUD);
 app.listen(process.env.PORT || 3000, () => {
   console.log('Server listening on port ' + port);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+// Set API Endpoints. Examples from starter code
+//app.get('/classes', db.getClasses);
+//app.get('/classes/:id', db.getClassesById);
+//app.post('/classes', db.addClass);

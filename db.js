@@ -61,49 +61,6 @@ let connection = new Promise(function(resolve, reject){
 	});
 });
 
- /***********************************************/
- /* EXAMPLE FUNCTIONS--WILL NOT WORK IN YOUR DB */
- /***********************************************/
-
-// Get all classes
-const getClasses = (request, response) => {
-	connection.then((conn) => {  //Once the ssh tunnel has been created and db connection is created with pool. Promise resolves to db (database connection)
-    conn.query('SELECT * FROM classes', (error, results) => {  // conn is same as db
-      if (error) {
-        throw error;
-      }
-      response.status(200).json(results.rows);
-    });
- });
-};
-
-// Get classes by ID
-const getClassesById = (request, response) => {
-	connection.then((conn) => {
-  	const id = request.params.id;
-
-  	conn.query('SELECT * FROM classes WHERE id = $1', [id], (error, results) => {
-	    if (error) {
-	      throw error;
-	    }
-	    response.status(200).json(results.rows);
-  	});
-	});
-};
-
-// Add a new class
-const addClass = (request, response) => {
-	connection.then((conn) => {
-  	const { id, title, semester, year } = request.body;
-
-  	conn.query('INSERT INTO classes VALUES ($1, $2, $3, $4)', [id, title, semester, year], (error, results) => {
-	    if (error) {
-	      throw error;
-	    }
-	    response.status(201).send(`Class added with ID: ${id}`);
-  	});
-	});
-};
 
 
  /**********************************************************/
@@ -354,17 +311,76 @@ const deleteData = (request, response) => {
 // Export the database connection and CRUD functions
 export default {
 	connection,
-	getClasses,
-	getClassesById,
-	addClass,
 	readData,
 	createData,
 	updateData,
+	deleteData,
 	readToTestCreateCRUD,
 	readToTestUpdateCRUD,
-	deleteData,
 	readToTestDeleteCRUD
+	// getClasses,
+	// getClassesById,
+	// addClass,
 	//getClassesBySemester,
 	// updateClass,
 	// deleteClass
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///Example Crud functions from starter code
+
+ /***********************************************/
+ /* EXAMPLE FUNCTIONS--WILL NOT WORK IN YOUR DB */
+ /***********************************************/
+
+// Get all classes
+// const getClasses = (request, response) => {
+// 	connection.then((conn) => {  //Once the ssh tunnel has been created and db connection is created with pool. Promise resolves to db (database connection)
+//     conn.query('SELECT * FROM classes', (error, results) => {  // conn is same as db
+//       if (error) {
+//         throw error;
+//       }
+//       response.status(200).json(results.rows);
+//     });
+//  });
+// };
+
+// Get classes by ID
+// const getClassesById = (request, response) => {
+// 	connection.then((conn) => {
+//   	const id = request.params.id;
+
+//   	conn.query('SELECT * FROM classes WHERE id = $1', [id], (error, results) => {
+// 	    if (error) {
+// 	      throw error;
+// 	    }
+// 	    response.status(200).json(results.rows);
+//   	});
+// 	});
+// };
+
+// Add a new class
+// const addClass = (request, response) => {
+// 	connection.then((conn) => {
+//   	const { id, title, semester, year } = request.body;
+
+//   	conn.query('INSERT INTO classes VALUES ($1, $2, $3, $4)', [id, title, semester, year], (error, results) => {
+// 	    if (error) {
+// 	      throw error;
+// 	    }
+// 	    response.status(201).send(`Class added with ID: ${id}`);
+//   	});
+// 	});
+// };

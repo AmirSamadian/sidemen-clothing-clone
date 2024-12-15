@@ -1,12 +1,21 @@
 // Use the REST API to get your data 
 function loadData() {
-    fetch("") // fill in your REST API endpoint for a SELECT query
-    .then(response => response.json())  // body is not quite ready yet
-    .then(data => displayData(data,"fall"));     // now the body is ready
+    const collection_name = 'SDMN x Hot Wheels'
+    fetch(`/testRead/${collection_name}`) 
+      .then(response => response.json()) // JSON string returned by the server gets converted to a JSON Object
+      .then(data => displayData2(data));  // This function serves the purpose of dynamically displaying the data in the webpage. puts it in the HTML.
 
     // Add a fetch call for the spring semester as well
 
 }
+
+//I wrote this function to test the endpoint working with fetch. It worked
+function displayData2(data) {
+  console.log(data);
+  const myDataDiv = document.querySelector(".myData");
+  myDataDiv.innerHTML = `<h1>${JSON.stringify(data)}</h1>`;
+}
+
 
 // display the data
 function displayData(data) {
@@ -33,13 +42,13 @@ function addData() {
 
   // send the code to your endpoint using POST to add new data and then
   // call loadData to reload it
-  fetch(/*url of the endpoint*/,
+  fetch("/*url of the endpoint*/",
   {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(Object.fromEntries(formData),
+      body: JSON.stringify(Object.fromEntries(formData)),
   })
   .then(response => {   // first then checks if the response is ready and if it
     if(!response.ok) {  // is ok (200) or an error (500)
