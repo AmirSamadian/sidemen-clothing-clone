@@ -231,8 +231,7 @@ const updateData = (request, response) => {
 	console.log("updateData function called");
 	connection.then((conn) => {
 		console.log("Database connection established");
-		const email = request.params.email;
-		const new_number = request.params.new_number
+		const { email, new_number } = request.body;
 		conn.query('UPDATE project.Account SET phone_number = $1 WHERE email = $2',
 			[new_number, email],
 			(error, results) => {
@@ -242,7 +241,7 @@ const updateData = (request, response) => {
 					return;
 				}
 				console.log("Update executed successfully, results:", results.rows);
-				response.status(200).send(`Phone number updated to ${phone_number}`);
+				response.status(200).send(`Account with email: ${email} had phone number updated to ${new_number}`);
 			}
 		)
 	})

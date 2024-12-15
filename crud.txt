@@ -38,3 +38,30 @@ Browser at http://localhost:3000/testCreate shows:
 ]
 
 
+///////////////////////////// UPDATE ///////////////////////////////////////////////////////
+
+
+Curl command for changing a phone number for an account with a given email address:
+
+curl -X PUT -d "email=susan.jackson10@gmail.com" -d "new_number=101-101-1010" http://localhost:3000/testUpdate
+
+
+amirsamadian@FGH100304M07 database-management-project-AmirSamadian % curl -X PUT -d "email=susan.jackson10@gmail.com" -d "new_number=101-101-1010" http://localhost:3000/testUpdate
+
+Phone number updated to 101-101-1010%                                                                                                                                                      
+amirsamadian@FGH100304M07 database-management-project-AmirSamadian % 
+
+
+I then did this directly in the database and it worked because the new phone number shows up. 
+Not the old: 012-345-6789
+
+amirahmadsamadian=> SELECT email, phone_number FROM project.Account WHERE email LIKE 'susan%';
+           email           | phone_number 
+---------------------------+--------------
+ susan.jackson10@gmail.com | 101-101-1010
+(1 row)
+
+
+
+///////////////////////////// DELETE ///////////////////////////////////////////////////////
+
