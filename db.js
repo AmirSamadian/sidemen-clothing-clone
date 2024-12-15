@@ -74,8 +74,6 @@ let connection = new Promise(function(resolve, reject){
 
 
 // READ data from your database using a SELECT query
-
-
 const readData = (request, response) => {
 	console.log("readData function called"); 
   
@@ -222,7 +220,10 @@ const createData = (request, response) => {
 			(error, results) => {
 				if (error) {
 					console.error("Error executing query:", error);
-					response.status(500).json({ error: "Database query failed" });
+					if(error.code == '23505'){
+						response.status(500).send(`Database query failed. Input already exists.`);
+					}
+					response.status(500).json({ error: "Database query failed. Reason other than input already existing." });
 					return;
 				}
 				console.log("Insert executed successfully, results:", results.rows);
