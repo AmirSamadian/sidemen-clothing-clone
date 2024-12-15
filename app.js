@@ -36,9 +36,13 @@ app.get('/', (request, response) => {
 
 // Add your endpoints here
 app.get('/testRead/:collection_name', db.readData);  //each endpoint must have a different '/' Why? Learn about it
+
 app.post('/testCreate', db.createData);
 app.get('/testCreate/:last_name', db.readToTestCreateCRUD)
+
 app.put('/testUpdate', db.updateData);
+app.get('/testUpdate/:email', db.readToTestUpdateCRUD)
+
 app.delete('/testDelete', db.deleteData);
 
 

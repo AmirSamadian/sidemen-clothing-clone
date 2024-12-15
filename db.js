@@ -175,6 +175,37 @@ const readData = (request, response) => {
   };
 
 
+
+    //This is just to test if the create CRUD function I did will work if I use get. Required by assignment
+	const readToTestUpdateCRUD = (request, response) => {
+		console.log("readToTestUpdateCRUD function called"); 
+	  
+		connection
+		  .then((conn) => {
+			console.log("Database connection established"); 
+			const email = request.params.email;
+			const query = "SELECT email, phone_number FROM project.Account WHERE email = $1";
+			console.log("Executing query:", query);
+	  
+			conn.query(query, [email], (error, results) => {
+			  if (error) {
+				console.error("Error executing query:", error);
+				response.status(500).json({ error: "Database query failed" });
+				return;
+			  }
+			  
+			  console.log("Query executed successfully, results:", results.rows);
+			  response.status(200).json(results.rows); 
+			});
+		  })
+		  .catch((error) => {
+			console.error("Error establishing connection:", error); 
+			response.status(500).json({ error: "Database connection failed" });
+		  });
+	  };
+
+
+
 //////////////////////////////// CREATE CRUDS /////////////////////////////////////
 
 
@@ -286,6 +317,7 @@ export default {
 	createData,
 	updateData,
 	readToTestCreateCRUD,
+	readToTestUpdateCRUD,
 	deleteData
 	//getClassesBySemester,
 	// updateClass,
