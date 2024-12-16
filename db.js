@@ -102,17 +102,17 @@ const readData = (request, response) => {
 
 
   //This is just to test if the create CRUD function I did will work if I use get. Required by assignment
-  const readToTestCreateCRUD = (request, response) => {
-	console.log("readToTestCreateCRUD function called"); 
+  const getAccountDetailsByEmail = (request, response) => {
+	console.log("getAccountDetailsByEmail function called"); 
   
 	connection
 	  .then((conn) => {
 		console.log("Database connection established"); 
-		const last_name = request.params.last_name;
-		const query = "SELECT * FROM project.Account WHERE last_name = $1";
+		const email = request.params.email;
+		const query = "SELECT * FROM project.Account WHERE email = $1";
 		console.log("Executing query:", query);
   
-		conn.query(query, [last_name], (error, results) => {
+		conn.query(query, [email], (error, results) => {
 		  if (error) {
 			console.error("Error executing query:", error);
 			response.status(500).json({ error: "Database query failed" });
@@ -194,12 +194,12 @@ const readData = (request, response) => {
 
 //CRUD Create
 // Add a new row to the database using INSERT INTO
-const createData = (request, response) => {
-	console.log("createData function called");
+const insertNewAccount = (request, response) => {
+	console.log("insertNewAccount function called");
 	connection.then((conn) => {
 		console.log("Database connection established"); 
 		const { 
-			email, acc_password, first_name, last_name,
+			email, password, first_name, last_name,
 			phone_number, country, city, street, zip, floor_level
 		} = request.body;
 
@@ -213,7 +213,7 @@ const createData = (request, response) => {
 			'INSERT INTO project.Account VALUES (DEFAULT, $1, $2, $3, $4, $5, NOW(), $6, $7, $8, $9, $10)', 
 
 			[
-				email, acc_password, first_name, last_name,
+				email, password, first_name, last_name,
 				phone_number, country, city, street, zip, floor_level_value
 			], 
 		
@@ -313,10 +313,10 @@ const deleteData = (request, response) => {
 export default {
 	connection,
 	readData,
-	createData,
+	insertNewAccount,
+	getAccountDetailsByEmail,
 	updateData,
 	deleteData,
-	readToTestCreateCRUD,
 	readToTestUpdateCRUD,
 	readToTestDeleteCRUD
 	// getClasses,

@@ -1,10 +1,10 @@
 // Use the REST API to get your data 
-function loadData() {
-    const collection_name = 'W2S Birthday'
-    fetch(`/testRead/${collection_name}`) 
-      .then(response => response.json()) // JSON string returned by the server gets converted to a JSON Object
-      .then(data => displayData(data));  // This function serves the purpose of dynamically displaying the data in the webpage. puts it in the HTML.
-}
+// function loadData() {
+//     const collection_name = 'W2S Birthday'
+    // fetch(`/testRead/${collection_name}`) 
+      // .then(response => response.json()) // JSON string returned by the server gets converted to a JSON Object
+      // .then(data => displayData(data));  // This function serves the purpose of dynamically displaying the data in the webpage. puts it in the HTML.
+// }
 
 //I wrote this function to test the endpoint working with fetch. It worked
 function displayData2(data) {
@@ -51,15 +51,19 @@ function displayData(data) {
 
 // update the database and the view in the UI
 function addData() {
+  console.log("addData function called");
   // Make sure any  hidden form variables are set properly
-  // I don't have any hidden form variables for this form
+    // I don't have any hidden form variables for this form
 
   // Get the form data
-  var formData = new FormData(document.getElementById('data_form'));
+  var formData = new FormData(document.getElementById('create_account_form'));
+  const formDataObject = Object.fromEntries(formData); //Converts the FormData into a JS Object so I can access the email from it
+  const account_email = formDataObject.email;
+  console.log(`account email is: ${account_email}`);
 
   // send the code to your endpoint using POST to add new data and then
   // call loadData to reload it
-  fetch("/testCreate",
+  fetch("/createAccount",
   {
       method: "POST",
       headers: {
@@ -76,7 +80,7 @@ function addData() {
     }                  
   })
   // prints out confirmation from DB and updates displayed tables
-  .then(data => {console.log(data); loadAccountData();}) 
+  .then(data => {console.log(data); loadAccountData(account_email);}) 
   // catch the error that occurred and print to the console
   .catch(error => { console.error('Error:', error)});
 
@@ -87,8 +91,22 @@ function addData() {
 }
 
 
-function loadAccountData() {
-  fetch(`/accountDetails`) 
+function loadAccountData(email) {
+  fetch(`/accountDetails/${email}`) 
     .then(response => response.json()) 
-    .then(data => displayData(data));
+    .then(data => displayData3(data));
+}
+
+function displayData3(data) {
+  const displayDiv = document.getElementById("accountDisplay");
+
+  if (displayDiv) {
+    let accountInfo = "";
+    for (let key in data[0]) {  
+      if (data[0].hasOwnProperty(key)) {
+        accountInfo += `${key}: ${data[0][key]}<br>`;
+      }
+    }
+    displayDiv.innerHTML = accountInfo;
+  }
 }

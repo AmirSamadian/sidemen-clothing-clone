@@ -35,14 +35,18 @@ app.get('/', (request, response) => {
 //  Endpoints for lab7. 
 app.get('/testRead/:collection_name', db.readData);  //each get endpoint must have a different route
 
-app.post('/testCreate', db.createData);
-app.get('/testCreate/:last_name', db.readToTestCreateCRUD)
+//For lab8
+app.post('/createAccount', db.insertNewAccount);
+app.get('/accountDetails/:email', db.getAccountDetailsByEmail)
 
 app.put('/testUpdate', db.updateData);
 app.get('/testUpdate/:email', db.readToTestUpdateCRUD)
 
 app.delete('/testDelete', db.deleteData);
 app.get('/testDelete', db.readToTestDeleteCRUD);
+
+
+
 
 
 
