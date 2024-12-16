@@ -41,6 +41,9 @@ nav a:hover {
     color:antiquewhite;
 }
 
+#account_logo path:hover {
+    fill:antiquewhite;
+}
 
 nav li #logo {
     /* font-family: sans-serif; */
@@ -63,10 +66,10 @@ nav li #logo {
 }
 
 .search {
-    margin-right: -10px;
+    margin-right: -7px;
 }
 .cart {
-    margin-left: -10px;
+    margin-left: -7px;
 }
 
 /* Styling the mobile nav menu*/
