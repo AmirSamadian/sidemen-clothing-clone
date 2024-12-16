@@ -197,41 +197,59 @@ img {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 90%; /* Set the width of the login box to 70% of the screen */
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10%;
-    margin-bottom: 10%;
-     /* This centers it horizontally and gives 40px margin on top and bottom */
-    background-color: rgb(227, 227, 227);
+    margin: 7%;
+    background-color: rgb(241, 241, 241);
     padding: 20px; /*padding inside the box */
 }
 .login h1 {
     padding: 20px;
+    margin-bottom: 10px;
 }
 
 .login form {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 70%;
+    width: 60%;
     padding: 10px;
     gap:10px;
 }
 
 .login form .input {
     width: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.login form input {
+    box-sizing: border-box;
+    flex-grow: 1;
+    height: 30px;
+    min-width: 0px;
+    padding: 1em;
+}
+
+.login form label {
+    padding: 3px;
+    margin-right: 3px;
+}
+
+#mail_logo path {
+    fill: rgb(0, 0, 0);
+}
+#lock_logo path {
+    fill: rgb(0, 0, 0);
 }
 
 .login button {
     padding: 10px;
+    margin-top: 20px;
     background-color: #000000;
     color: white;
     border: none;
     cursor: pointer;
-    border-radius: 20px; /* Optional: for rounded corners */
+    border-radius: 20px; /* for rounded corners */
 }
-
 .login button:hover {
     background-color: #303030;
 }
@@ -250,9 +268,3 @@ img {
     text-decoration: underline;
 }
 
-#mail_logo path {
-    fill: rgb(0, 0, 0);
-}
-#lock_logo path {
-    fill: rgb(0, 0, 0);
-}
