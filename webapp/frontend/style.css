@@ -168,6 +168,65 @@ nav li #logo {
 
 
 
+/*/////////////////////////   Landing Page: Top Image   ///////////////////////////////////////////////*/
+
+.top_image_container {
+    position: relative; /* To control the layout */
+    width: 100%; /* Default: Full width */
+    height: auto; /* Adjust height to maintain aspect ratio */
+}
+
+.top_image_container img {
+    width: 100%; 
+    height: auto;
+    display: block;
+}
+
+.top_image_container button {
+    position: absolute; /* Position relative to the container */
+    bottom: 10%; /* Distance from the bottom of the image */
+    left: 49%; /* Horizontally center the button */
+    transform: translateX(-50%); /* Adjust centering */
+    padding: 10px 20px; 
+    background-color: #0000; 
+    color: #fff; 
+    border: none; /* Remove button's border */
+    border-radius: 20px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    text-decoration: underline;
+}
+
+.top_image_container button:hover {
+    background-color: #ffffff;
+    color: black;
+    text-decoration: none;
+}
+
+
+@media (max-width: 940px) {
+    .top_image_container {
+        width: 100vw; /* Full viewport width */
+        height: 85vh; /* Cover 80% of the screen height */
+    }
+    .top_image_container img {
+        display: block;
+        object-fit: cover; /* Ensures the image covers the container proportionally */
+        width: 100%; /* Image fills the container */
+        height: 100%; /* Stretches while maintaining aspect ratio */
+    }
+}
+@media (max-width: 660px) {
+    .top_image_container {
+        height: 70vh; /* Cover 80% of the screen height */
+    }
+}
+@media (max-width: 590px) {
+    .top_image_container {
+        height: 60vh; /* Cover 80% of the screen height */
+    }
+}
+
+
 
 /*/////////////////////////   Search Page   ///////////////////////////////////////////////*/
 

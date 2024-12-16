@@ -7,11 +7,11 @@
 // }
 
 //I wrote this function to test the endpoint working with fetch. It worked
-function displayData2(data) {
-  console.log(data);
-  const myDataDiv = document.querySelector(".myData");
-  myDataDiv.innerHTML = `<h1>${JSON.stringify(data)}</h1>`;
-}
+// function displayData2(data) {
+//   console.log(data);
+//   const myDataDiv = document.querySelector(".myData");
+//   myDataDiv.innerHTML = `<h1>${JSON.stringify(data)}</h1>`;
+// }
 
 
 // display the data
