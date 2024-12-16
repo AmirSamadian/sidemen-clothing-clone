@@ -234,12 +234,11 @@ img {
     margin-right: 3px;
 }
 
-#mail_logo path {
+.form_label_icon path {
     fill: rgb(0, 0, 0);
 }
-#lock_logo path {
-    fill: rgb(0, 0, 0);
-}
+
+
 
 .login button {
     padding: 10px;
@@ -266,5 +265,11 @@ img {
 
 .login a:hover {
     text-decoration: underline;
+}
+
+.login h3{
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
 }
 
