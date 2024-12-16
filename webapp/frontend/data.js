@@ -4,9 +4,6 @@ function loadData() {
     fetch(`/testRead/${collection_name}`) 
       .then(response => response.json()) // JSON string returned by the server gets converted to a JSON Object
       .then(data => displayData(data));  // This function serves the purpose of dynamically displaying the data in the webpage. puts it in the HTML.
-
-    // Add a fetch call for the spring semester as well
-
 }
 
 //I wrote this function to test the endpoint working with fetch. It worked
@@ -49,10 +46,13 @@ function displayData(data) {
 }
 
 
+
+
+
 // update the database and the view in the UI
 function addData() {
-
   // Make sure any  hidden form variables are set properly
+  // I don't have any hidden form variables for this form
 
   // Get the form data
   var formData = new FormData(document.getElementById('data_form'));
@@ -76,7 +76,7 @@ function addData() {
     }                  
   })
   // prints out confirmation from DB and updates displayed tables
-  .then(data => {console.log(data); loadData();}) 
+  .then(data => {console.log(data); loadAccountData();}) 
   // catch the error that occurred and print to the console
   .catch(error => { console.error('Error:', error)});
 
@@ -86,3 +86,9 @@ function addData() {
   return false;
 }
 
+
+function loadAccountData() {
+  fetch(`/accountDetails`) 
+    .then(response => response.json()) 
+    .then(data => displayData(data));
+}
