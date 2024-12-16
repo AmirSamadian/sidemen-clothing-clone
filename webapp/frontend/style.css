@@ -24,7 +24,7 @@ nav ul {
 }
 
 nav li {
-    height: 75px;   /* We set the height of the li's and that sets the height of the parent to the height of the li*/
+    height: 100px;   /* We set the height of the li's and that sets the height of the parent to the height of the li*/
 }
 nav a{
     height: 100%;
