@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script defer src="index.js"></script>
+    <script defer src="data.js"></script>
     <title>sidemenclothingaccountregistration</title>
 </head>
 <body>
@@ -73,7 +74,7 @@
     
     <div class="login">
         <h1>Create Account</h1>
-        <form onsubmit="accountCreationData()">
+        <form onsubmit="return addData();" id="create_account_form">
             <div class="input">
                 <label for="first_name_input">
                     <svg class="form_label_icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Z"/></svg>                
@@ -101,12 +102,18 @@
                 </label>
                 <input required type="password" name="password" id="password_input" placeholder="Password">
             </div>
+            <div class="input">
+                <label for="repeat_password_input">
+                    <svg class="form_label_icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M252.31-100q-29.83 0-51.07-21.24Q180-142.48 180-172.31v-375.38q0-29.83 21.24-51.07Q222.48-620 252.31-620H300v-80q0-74.92 52.54-127.46Q405.08-880 480-880q74.92 0 127.46 52.54Q660-774.92 660-700v80h47.69q29.83 0 51.07 21.24Q780-577.52 780-547.69v375.38q0 29.83-21.24 51.07Q737.52-100 707.69-100H252.31ZM480-290q29.15 0 49.58-20.42Q550-330.85 550-360t-20.42-49.58Q509.15-430 480-430t-49.58 20.42Q410-389.15 410-360t20.42 49.58Q450.85-290 480-290ZM360-620h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80Z"/></svg>
+                </label>
+                <input required type="password" name="repeat_password" id="repeat_password_input" placeholder="Repeat Password">
+            </div>
 
             <div class="input">
                 <label for="phone_number_input">
                     <svg class="form_label_icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M798-120q-125 0-247-54.5T329-329Q229-429 174.5-551T120-798q0-18 12-30t30-12h162q14 0 25 9.5t13 22.5l26 140q2 16-1 27t-11 19l-97 98q20 37 47.5 71.5T387-386q31 31 65 57.5t72 48.5l94-94q9-9 23.5-13.5T670-390l138 28q14 4 23 14.5t9 23.5v162q0 18-12 30t-30 12ZM241-600l66-66-17-94h-89q5 41 14 81t26 79Zm358 358q39 17 79.5 27t81.5 13v-88l-94-19-67 67ZM241-600Zm358 358Z"/></svg>                
                 </label>
-                <input type="tel" name="phone_number" id="phone_number_input" placeholder="Phone Number">
+                <input type="tel" name="phone_number" id="phone_number_input" placeholder="Phone Number [optional]">
             </div>
 
             <h3>Address Information</h3>
@@ -139,8 +146,12 @@
                 <input required type="text" name="zip" id="zip_input" placeholder="Zip Code">
             </div>
 
-
-
+            <div class="input">
+                <label for="floor_level_input">
+                    <svg class="form_label_icon" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M160.77-136.92v-540H370v-105.39L480-890l110 107.69v265.39h209.23v380H160.77Zm60-60h100v-100h-100v100Zm0-160h100v-100h-100v100Zm0-160h100v-100h-100v100Zm209.23 320h100v-100H430v100Zm0-160h100v-100H430v100Zm0-160h100v-100H430v100Zm0-160h100v-100H430v100Zm209.23 480h100v-100h-100v100Zm0-160h100v-100h-100v100Z"/></svg>
+                </label>
+                <input required type="text" name="floor_level" id="floor_level_input" placeholder="What floor are you on? [optional]">
+            </div>
 
             <button type="submit">Create</button>
         </form>
