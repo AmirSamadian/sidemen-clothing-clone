@@ -346,9 +346,46 @@ img {
     padding-top: 10px;
 }
 
-/*///////////////////////////////////////////////////////////////////////////////////////*/
+/*////////////////////////////////// Account Creation Confirmation /////////////////////////////////////*/
 
 
+.registrationConfirmation {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(241, 241, 241);
+    padding: 20px;
+    margin: 7%;
 
+}
+.registrationConfirmation h1 {
+    padding: 20px;
+    margin-bottom: 10px;
+}
+.registrationConfirmation p {
+    margin-top: 10px;
+    padding-bottom: 50px;
+}
 
+.registrationConfirmation a {
+    color: #484848;
+    text-decoration: underline;
+}
+
+.registrationConfirmation a:hover {
+    text-decoration: none;
+}
+
+.registrationConfirmation h3{
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+
+.registrationConfirmation ul {
+    padding-bottom: 100px;
+}
+.registrationConfirmation ul li {
+    padding: 10px;
+}
 

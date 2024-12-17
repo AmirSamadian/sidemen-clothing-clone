@@ -14,62 +14,68 @@
 // }
 
 
+
 // display the data
-function displayData(data) {
-  console.log(data); // Inspect the data in the console to verify its structure
+// function displayData(data) {
+  // console.log(data); // Inspect the data in the console to verify its structure
 
   // set up the table
-  const myDataDiv = document.querySelector(".myData");
-  myDataDiv.innerHTML = ""; // clear existing content out--will need this for dynamic updates
+  // const displayDiv = document.getElementById("accountDisplay");
+  // myDataDiv.innerHTML = ""; // clear existing content out--will need this for dynamic updates
 
   // loop through the data and display it by adding it to textNodes and appending them
-  data.forEach(row => {
+  // data.forEach(row => {
       // Create a <ul> element for the current row
-      const ul = document.createElement("ul");
+      // const ul = document.createElement("ul");
 
       // Loop through each key-value pair in the row
-      for (const [key, value] of Object.entries(row)) {
+      // for (const [key, value] of Object.entries(row)) {
           // Create an <li> element for the current key-value pair
-          const li = document.createElement("li");
+          // const li = document.createElement("li");
 
-          const textNode = document.createTextNode(`${key}: ${value}`);
+          // const textNode = document.createTextNode(`${key}: ${value}`);
 
           // Append the text node to the <li>
-          li.appendChild(textNode);
+          // li.appendChild(textNode);
           // Append the <li> to the <ul>
-          ul.appendChild(li);
-      }
+      //     ul.appendChild(li);
+      // }
 
       // Append the <ul> to the container
-      myDataDiv.appendChild(ul);
-  });
-}
+//       displayDiv.appendChild(ul);
+//   });
+// }
 
 
 
-
+var hasAccount = false;
 
 // update the database and the view in the UI
 function addData() {
   console.log("addData function called");
-  // Make sure any  hidden form variables are set properly
-    // I don't have any hidden form variables for this form
-
   // Get the form data
   var formData = new FormData(document.getElementById('create_account_form'));
   const formDataObject = Object.fromEntries(formData); //Converts the FormData into a JS Object so I can access the email from it
+  console.log("Raw FormDataObject:", formDataObject);
+  console.log("Payload sent to server:", JSON.stringify(formDataObject));
+
   const account_email = formDataObject.email;
   console.log(`account email is: ${account_email}`);
 
-  // send the code to your endpoint using POST to add new data and then
-  // call loadData to reload it
+  //make sure all empty strings given by the form are entered as null
+  Object.keys(formDataObject).forEach(attribute => {
+    if (formDataObject[attribute] === '')
+      formDataObject[attribute] = null;
+  });
+
+  // send the code to your endpoint using POST to add new data and then call loadData to reload it
   fetch("/createAccount",
   {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(Object.fromEntries(formData)),
+      body: JSON.stringify(formDataObject),
   })
   .then(response => {   // first then checks if the response is ready and if it
     if(!response.ok) {  // is ok (200) or an error (500)
@@ -80,33 +86,29 @@ function addData() {
     }                  
   })
   // prints out confirmation from DB and updates displayed tables
-  .then(data => {console.log(data); loadAccountData(account_email);}) 
+  .then(data => {
+    console.log(data); 
+    hasAccount = true;
+    console.log(hasAccount);
+    confirmAccountCreation(account_email);
+  }) 
   // catch the error that occurred and print to the console
   .catch(error => { console.error('Error:', error)});
 
-
-  // make sure to do this! Otherwise the page will reload rather than the table
-  // updating dynamically
-  return false;
+  return false;   // make sure to do this! Otherwise the page will reload rather than the table updating dynamically
 }
 
 
-function loadAccountData(email) {
-  fetch(`/accountDetails/${email}`) 
-    .then(response => response.json()) 
-    .then(data => displayData3(data));
-}
 
-function displayData3(data) {
-  const displayDiv = document.getElementById("accountDisplay");
+function confirmAccountCreation(email) {
+  const p_with_link = document.querySelector('#to_account_details');
+  p_with_link.innerHTML = `<a href="accountDetails.html?email=${encodeURIComponent(email)}">View Account Details</a>`
 
-  if (displayDiv) {
-    let accountInfo = "";
-    for (let key in data[0]) {  
-      if (data[0].hasOwnProperty(key)) {
-        accountInfo += `${key}: ${data[0][key]}<br>`;
-      }
-    }
-    displayDiv.innerHTML = accountInfo;
-  }
+  //Changing the display of the create account page
+  const form = document.querySelector('.login');
+  const confirmation = document.querySelector('.registrationConfirmation');
+  form.style.display = 'none';
+  confirmation.style.display = 'flex';
+
+  //make sure this doesn't refresh the page whenever it gets called.
 }

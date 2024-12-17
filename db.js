@@ -198,23 +198,20 @@ const insertNewAccount = (request, response) => {
 	console.log("insertNewAccount function called");
 	connection.then((conn) => {
 		console.log("Database connection established"); 
+		
+		console.log("Request Body:", request.body);
+
 		const { 
 			email, password, first_name, last_name,
 			phone_number, country, city, street, zip, floor_level
 		} = request.body;
-
-		let floor_level_value;
-		if (floor_level.toLowerCase() === 'null') {
-			floor_level_value = null;
-		} else 
-			floor_level_value = floor_level;
 
 		conn.query(
 			'INSERT INTO project.Account VALUES (DEFAULT, $1, $2, $3, $4, $5, NOW(), $6, $7, $8, $9, $10)', 
 
 			[
 				email, password, first_name, last_name,
-				phone_number, country, city, street, zip, floor_level_value
+				phone_number, country, city, street, zip, floor_level
 			], 
 		
 			(error, results) => {
