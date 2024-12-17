@@ -17,6 +17,7 @@ function loadAccountData(email) {
     fetch(`/accountDetails/${email}`) 
       .then(response => response.json()) 
       .then(data => {
+        console.log(data);
         displayData(data);
         //Once the account is created (fetch complete), I want to redirect the user to the Account Details page
         // window.location.href = 'accountDetails.html';
@@ -26,17 +27,50 @@ function loadAccountData(email) {
       })
   }
   
+  //I decided to display the account data one by one (no loop) because there were few of them and not all should be treated the same
   function displayData(data) {
-    const displayDiv = document.getElementById("accountDisplay"); //only the accountDetails.html has a div with this name
-  
-    if (displayDiv) {
-      let accountInfo = "";
-      for (let key in data[0]) {  
-        if (data[0].hasOwnProperty(key)) {
-          accountInfo += `${key}: ${data[0][key]}<br>`;
-        }
+    var accountInfoUL = document.getElementById("accountInformation"); //only the accountDetails.html has this element
+    var accountInfoUL = document.getElementById("accountInformation"); //only the accountDetails.html has this element
+
+
+
+    if (accountInfoUL) {  //check that it was able to grab onto this element (element exists?)
+      accountInfoUL.innerHTML = ``; // clears existing content out--will need this for dynamic updates
+
+      var info = data[0];
+      
+      const name_li = document.createElement("li");
+      name_li.innerHTML = `Name: <p>${info.first_name} ${info.last_name}</p>`;
+      accountInfoUL.appendChild(name_li);
+
+      const email_li = document.createElement("li");
+      email_li.innerHTML = `E-mail: <p>${info.email}</p>`;
+      accountInfoUL.appendChild(email_li);
+
+      const phone_li = document.createElement("li");
+      if (info.phone_number != null) {
+        phone_li.innerHTML = `Phone Number:  <p>${info.phone_number}</p>`;
+      } else {
+        phone_li.innerHTML = `Phone Number: <p>Not Provided</p>`;
       }
-      displayDiv.innerHTML = accountInfo;
+      accountInfoUL.appendChild(phone_li);
+
+      const address_li = document.createElement("li");
+      if (info.floor_level == null) {
+        info.floor_level = 'N/A'
+      }
+      address_li.innerHTML = `Address: 
+          <ul>
+          <li>${info.street}</li>
+          <li>${info.city}</li>
+          <li>${info.country}</li>
+          <li>${info.zip}</li>
+          <li> floor: ${info.floor_level}</li>
+          </ul>`
+          accountInfoUL.appendChild(address_li);
+    } 
+    else {
+      console.error("accountInformation ul not found on this page");
     }
   }
   
