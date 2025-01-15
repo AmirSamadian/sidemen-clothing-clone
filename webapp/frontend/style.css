@@ -6,6 +6,7 @@
     padding: 0; /* Makes sure there is no default padding to begin with*/
     box-sizing: border-box; /* Makes sure the size and location of things includes it's padding and border not just content*/
     text-decoration: none;  /* Give me plain everything. Links shouldn't have underlines */
+    list-style: none;
 }
 
 body {
@@ -388,4 +389,64 @@ img {
 .registrationConfirmation ul li {
     padding: 10px;
 }
+
+
+/*////////////////////////////////// Account Details Page /////////////////////////////////////*/
+
+
+#accountDisplay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 7%;
+    background-color: rgb(241, 241, 241);
+    padding: 20px; /*padding inside the box */
+}
+#accountDisplay h1 {
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+#accountInformation {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+#accountInformation li {
+    display: flex;
+    text-decoration: none;
+}
+
+
+/*////////////////////////////////// Footer Socials /////////////////////////////////////*/
+
+footer {
+    background-color: rgb(226, 226, 226);
+    display: flex;
+    flex-direction: column;
+}
+
+footer h3 {
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.logo_container ul {
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.logo_container ul li a svg {
+    height: 30px;
+    width: 30px;
+    
+}
+
+
 
