@@ -448,10 +448,6 @@ footer {
 .text_container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    /* grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr); */
-    /* justify-content: center;
-    align-items: center; */
     margin-bottom: 25px;
 }
 .text_container a {
@@ -466,7 +462,7 @@ footer {
     /* background-color: antiquewhite; */
     display: flex;
     justify-content: start;
-    margin-left: 30px;
+    margin-left: 20%;
 }
 .text_portion ul li {
     margin: 10px;
@@ -493,6 +489,7 @@ footer {
     align-items: start;
     justify-content: start;
     margin-left: 30px;
+    margin-right: 20%;
 }
 .footer_download h4 {
     padding: 10px;
@@ -505,4 +502,20 @@ footer {
 }
 .appstore {
     height: 20px;
+}
+
+@media (min-width: 800px) {
+    .footer_account {
+        display: flex;
+        justify-content: center;
+    }
+    .footer_download {
+        /* background-color: aquamarine; */
+        justify-self: end;
+    }
+}
+@media (max-width: 399px) {
+    .text_portion {
+        margin-left: 30px;
+    }
 }
