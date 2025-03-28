@@ -6,7 +6,7 @@ The Sidemen Clothing Clone is a full-stack e-commerce application designed to re
 
 ### Purpose 🎯
 
-I picked this project because of its breadth and depth. It’s highly applicable in the real world, providing a benchmark that allows me to work with a level of detail similar to professionals. This project will help deepen my understanding of full-stack development by covering a wide range of topics, including front-end design, back-end API development, database management, user authentication, developing search algorithms, and more.
+I picked this project because of its breadth and depth. It’s highly applicable in the real world, providing a benchmark that allows me to work with a level of detail similar to professionals. This project will help deepen my understanding of full-stack development by covering a wide range of topics, including front-end design, back-end API development, database management, user authentication, developing search algorithms, and more. Progress has been slow as I've emphasized learning and building a detailed Note Stack.
 
 ### Key Features 🔑:
 ##### Responsive Design 📱💻:
@@ -28,3 +28,19 @@ I picked this project because of its breadth and depth. It’s highly applicable
 - A search system with filters for easier product discovery.
 #####	Product Reviews ⭐:
 - A product review system that allows users to leave feedback, similar to Amazon’s review system.
+
+### Technologies Used So Far 🛠️:
+- Frontend: HTML, CSS, JavaScript
+- Backend: Node.js, Express.js
+- PostgreSQL Database (provided by King's College)
+- REST API for communication between frontend and backend
+- More Coming....
+
+### Design & UI/UX 🎨
+
+Although this project is a clone, the UI/UX design was crafted by me. The design draws heavy inspiration from Sidemen Clothing, but also incorporates elements from other major brands such as Nike, Adidas, Amazon, and Ralph Lauren. 
+
+
+
+
+
