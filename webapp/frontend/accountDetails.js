@@ -30,9 +30,6 @@ function loadAccountData(email) {
   //I decided to display the account data one by one (no loop) because there were few of them and not all should be treated the same
   function displayData(data) {
     var accountInfoUL = document.getElementById("accountInformation"); //only the accountDetails.html has this element
-    var accountInfoUL = document.getElementById("accountInformation"); //only the accountDetails.html has this element
-
-
 
     if (accountInfoUL) {  //check that it was able to grab onto this element (element exists?)
       accountInfoUL.innerHTML = ``; // clears existing content out--will need this for dynamic updates
@@ -40,18 +37,18 @@ function loadAccountData(email) {
       var info = data[0];
       
       const name_li = document.createElement("li");
-      name_li.innerHTML = `Name: <p>${info.first_name} ${info.last_name}</p>`;
+      name_li.innerHTML = `<h4>Name: </h4> <p>${info.first_name} ${info.last_name}</p>`;
       accountInfoUL.appendChild(name_li);
 
       const email_li = document.createElement("li");
-      email_li.innerHTML = `E-mail: <p>${info.email}</p>`;
+      email_li.innerHTML = `<h4>E-mail: </h4> <p>${info.email}</p>`;
       accountInfoUL.appendChild(email_li);
 
       const phone_li = document.createElement("li");
       if (info.phone_number != null) {
-        phone_li.innerHTML = `Phone Number:  <p>${info.phone_number}</p>`;
+        phone_li.innerHTML = `<h4>Phone Number: </h4> <p>${info.phone_number}</p>`;
       } else {
-        phone_li.innerHTML = `Phone Number: <p>Not Provided</p>`;
+        phone_li.innerHTML = `<h4>Phone Number: </h4> <p>Not Provided</p>`;
       }
       accountInfoUL.appendChild(phone_li);
 
@@ -59,13 +56,14 @@ function loadAccountData(email) {
       if (info.floor_level == null) {
         info.floor_level = 'N/A'
       }
-      address_li.innerHTML = `Address: 
+      address_li.innerHTML = `
+          <h4>Address: </h4>
           <ul>
-          <li>${info.street}</li>
-          <li>${info.city}</li>
-          <li>${info.country}</li>
-          <li>${info.zip}</li>
-          <li> floor: ${info.floor_level}</li>
+            <li> Street: ${info.street}</li>
+            <li> City: ${info.city}</li>
+            <li> Country: ${info.country}</li>
+            <li> Zip: ${info.zip}</li>
+            <li> Floor: ${info.floor_level}</li>
           </ul>`
           accountInfoUL.appendChild(address_li);
     } 
